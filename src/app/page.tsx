@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
+import UserPanel from '@/components/UserPanel';
 import UrlSubmitter from '@/components/UrlSubmitter';
 import LiveMonitor from '@/components/LiveMonitor';
 import HistoryDashboard from '@/components/HistoryDashboard';
@@ -10,7 +11,7 @@ import AuthModal from '@/components/AuthModal';
 import PricingModal from '@/components/PricingModal';
 import AdminPanelModal from '@/components/AdminPanelModal';
 import { EngineType, IndexingJob, IndexingStats, SubscriptionTier } from '@/lib/types';
-import { Sparkles, ShieldAlert, Zap, Layers, Lock } from 'lucide-react';
+import { Sparkles, ShieldAlert, Zap, Layers, Lock, ArrowRight, Shield, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   const [currentUser, setCurrentUser] = useState<any | null>(null);
@@ -163,7 +164,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-slate-950">
       
-      {/* Header */}
+      {/* Top Header */}
       <Header
         currentUser={currentUser}
         onOpenAuth={() => setIsAuthModalOpen(true)}
@@ -174,70 +175,74 @@ export default function Home() {
         activeJobsCount={activeJob && activeJob.status === 'submitting' ? 1 : 0}
       />
 
-      {/* Main Container */}
+      {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
         
-        {/* Hero Section */}
-        <section className="relative text-center py-6 space-y-4">
-          <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-cyan-400 shadow-md">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span>Multi-Tenant Enterprise Indexing Architecture</span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight max-w-4xl mx-auto leading-tight">
-            Instant Search Indexing for <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
-              Every Website & Domain
-            </span>
-          </h1>
-
-          <p className="text-slate-400 text-base sm:text-lg max-w-2xl mx-auto font-normal">
-            Submit your URLs or sitemaps to trigger immediate crawling by Bing, Yandex, Google, Naver, and Seznam.
-          </p>
-
-          {!currentUser && (
-            <div className="pt-2">
-              <button
-                onClick={() => setIsAuthModalOpen(true)}
-                className="px-6 py-3 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-semibold text-xs transition"
-              >
-                ⚡ Get Started Free — 10 URLs / month included
-              </button>
-            </div>
-          )}
-        </section>
-
-        {/* Submitter & Telemetry Console */}
-        <section className="space-y-8">
-          <UrlSubmitter
-            onSubmit={handleSubmission}
-            isSubmitting={isSubmitting}
-            hasGoogleCreds={currentUser?.hasGoogleCreds || false}
-            onOpenCredentials={() => setIsCredentialsModalOpen(true)}
-          />
-
-          <LiveMonitor job={activeJob} />
-        </section>
-
-        {/* History Dashboard */}
         {currentUser ? (
-          <section className="pt-6">
-            <HistoryDashboard stats={stats} jobs={jobsHistory} />
-          </section>
+          /* Logged-In Modern User Panel */
+          <UserPanel
+            user={currentUser}
+            activeJob={activeJob}
+            stats={stats}
+            jobsHistory={jobsHistory}
+            isSubmitting={isSubmitting}
+            onSubmit={handleSubmission}
+            onRefreshData={fetchUserProfile}
+            onRequestUpgrade={handleRequestUpgrade}
+          />
         ) : (
-          <section className="rounded-2xl bg-slate-900/60 border border-slate-800 p-8 text-center space-y-3">
-            <Lock className="w-8 h-8 text-slate-600 mx-auto" />
-            <h3 className="text-lg font-bold text-white">Private User Workspace Panel</h3>
-            <p className="text-xs text-slate-400 max-w-md mx-auto">
-              Log in to view your private submission history, connect your own Google API key, and manage your monthly indexing quota.
-            </p>
-            <button
-              onClick={() => setIsAuthModalOpen(true)}
-              className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition shadow-md"
-            >
-              Sign In to Your Workspace
-            </button>
-          </section>
+          /* Unauthenticated Landing / Hero Console */
+          <div className="space-y-12">
+            {/* Hero Banner */}
+            <section className="relative text-center py-8 space-y-5">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-semibold text-cyan-400 shadow-md">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
+                <span>Enterprise Multi-Engine Indexing Suite</span>
+              </div>
+
+              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight max-w-5xl mx-auto leading-tight">
+                Get Your URLs Indexed across <br className="hidden sm:block" />
+                <span className="bg-gradient-to-r from-cyan-400 via-indigo-400 to-emerald-400 bg-clip-text text-transparent">
+                  Google, Bing & Yandex
+                </span>{' '}
+                Instantly.
+              </h1>
+
+              <p className="text-slate-400 text-base sm:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
+                Paste any URL or XML sitemap link. Our engine automatically validates, generates verification keys, and broadcasts changes to search crawlers.
+              </p>
+
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-bold text-sm shadow-xl shadow-cyan-500/25 transition transform hover:scale-[1.02] flex items-center space-x-2"
+                >
+                  <Zap className="w-4 h-4 text-cyan-200" />
+                  <span>Start Indexing Free — 10 URLs/month</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+
+                <button
+                  onClick={() => setIsPricingModalOpen(true)}
+                  className="px-6 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-bold transition"
+                >
+                  View Subscription Plans ($5/mo)
+                </button>
+              </div>
+            </section>
+
+            {/* Quick Demo Submitter Preview */}
+            <section className="space-y-8">
+              <UrlSubmitter
+                onSubmit={handleSubmission}
+                isSubmitting={isSubmitting}
+                hasGoogleCreds={false}
+                onOpenCredentials={() => setIsAuthModalOpen(true)}
+              />
+
+              <LiveMonitor job={activeJob} />
+            </section>
+          </div>
         )}
 
       </main>
@@ -254,7 +259,7 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Modals */}
+      {/* Global Modals */}
       <AuthModal
         isOpen={isAuthModalOpen}
         onClose={() => setIsAuthModalOpen(false)}
