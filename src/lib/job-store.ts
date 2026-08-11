@@ -1,17 +1,16 @@
 import fs from 'fs';
 import path from 'path';
-import { IndexingJob, UserCredentials, LogEntry } from './types';
+import { IndexingJob, UserAccount, LogEntry, PLAN_TIERS, SubscriptionTier, GoogleServiceAccount } from './types';
+import { hashPassword, encryptData, decryptData } from './security';
 
-// Ensure data persistence directory exists
 const DATA_DIR = path.join(process.cwd(), 'data');
 const STORE_FILE = path.join(DATA_DIR, 'store.json');
 
 interface StoreData {
   jobs: IndexingJob[];
-  credentials: UserCredentials;
+  users: UserAccount[];
 }
 
-// Global cache object to survive hot-reloading in dev mode
 const globalForStore = globalThis as unknown as {
   __indexnow_store__?: StoreData;
   __indexnow_subscribers__?: Set<(job: IndexingJob) => void>;
@@ -24,10 +23,7 @@ function initStore(): StoreData {
 
   let loadedData: StoreData = {
     jobs: [],
-    credentials: {
-      googleServiceAccount: null,
-      bingApiKey: null,
-    },
+    users: [],
   };
 
   try {
@@ -41,6 +37,29 @@ function initStore(): StoreData {
     }
   } catch (err) {
     console.error('Error initializing store:', err);
+  }
+
+  // Ensure default Admin Account exists
+  if (!loadedData.users || loadedData.users.length === 0) {
+    const adminAuth = hashPassword('admin123');
+    const defaultAdmin: UserAccount = {
+      id: 'usr_admin',
+      email: 'admin@indexpulse.com',
+      name: 'System Admin',
+      passwordHash: adminAuth.hash,
+      passwordSalt: adminAuth.salt,
+      role: 'admin',
+      tier: 'custom',
+      planStatus: 'active',
+      monthlyQuota: 100000,
+      urlsUsedThisMonth: 0,
+      currentPeriodStart: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+    };
+    loadedData.users = [defaultAdmin];
+    try {
+      fs.writeFileSync(STORE_FILE, JSON.stringify(loadedData, null, 2), 'utf-8');
+    } catch {}
   }
 
   globalForStore.__indexnow_store__ = loadedData;
@@ -62,7 +81,112 @@ export function getStoreData(): StoreData {
   return initStore();
 }
 
-export function getAllJobs(): IndexingJob[] {
+// User Accounts Management
+export function getAllUsers(): UserAccount[] {
+  return getStoreData().users;
+}
+
+export function getUserById(id: string): UserAccount | undefined {
+  const user = getStoreData().users.find((u) => u.id === id);
+  if (user) {
+    checkAndResetMonthlyQuota(user);
+  }
+  return user;
+}
+
+export function getUserByEmail(email: string): UserAccount | undefined {
+  const user = getStoreData().users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  if (user) {
+    checkAndResetMonthlyQuota(user);
+  }
+  return user;
+}
+
+export function createUser(email: string, name: string, passwordHash: string, passwordSalt: string): UserAccount {
+  const store = getStoreData();
+  const newUser: UserAccount = {
+    id: 'usr_' + Date.now().toString(36) + Math.random().toString(36).substring(2, 6),
+    email: email.toLowerCase(),
+    name,
+    passwordHash,
+    passwordSalt,
+    role: 'user',
+    tier: 'free',
+    planStatus: 'active',
+    monthlyQuota: PLAN_TIERS.free.monthlyQuota, // 10 URLs/month
+    urlsUsedThisMonth: 0,
+    currentPeriodStart: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+  };
+
+  store.users.push(newUser);
+  saveStore();
+  return newUser;
+}
+
+export function saveUser(user: UserAccount): void {
+  const store = getStoreData();
+  const idx = store.users.findIndex((u) => u.id === user.id);
+  if (idx >= 0) {
+    store.users[idx] = user;
+  } else {
+    store.users.push(user);
+  }
+  saveStore();
+}
+
+// Monthly Quota Reset Check (Every 30 Days)
+function checkAndResetMonthlyQuota(user: UserAccount): void {
+  const start = new Date(user.currentPeriodStart).getTime();
+  const now = Date.now();
+  const thirtyDaysMs = 30 * 24 * 3600 * 1000;
+
+  if (now - start > thirtyDaysMs) {
+    user.urlsUsedThisMonth = 0;
+    user.currentPeriodStart = new Date().toISOString();
+    saveUser(user);
+  }
+}
+
+/**
+ * Checks if a user has sufficient quota for a requested number of URLs.
+ * Deducts quota if valid.
+ */
+export function checkAndDeductQuota(
+  userId: string,
+  requestedCount: number
+): { allowed: boolean; remaining: number; totalQuota: number; errorMsg?: string } {
+  const user = getUserById(userId);
+  if (!user) {
+    return { allowed: false, remaining: 0, totalQuota: 0, errorMsg: 'User account not found.' };
+  }
+
+  const remaining = Math.max(0, user.monthlyQuota - user.urlsUsedThisMonth);
+  if (requestedCount > remaining) {
+    return {
+      allowed: false,
+      remaining,
+      totalQuota: user.monthlyQuota,
+      errorMsg: `Monthly URL quota exceeded. You have ${remaining} URLs remaining out of ${user.monthlyQuota}/month on your ${user.tier.toUpperCase()} plan. Please upgrade to submit more URLs.`,
+    };
+  }
+
+  user.urlsUsedThisMonth += requestedCount;
+  saveUser(user);
+
+  return {
+    allowed: true,
+    remaining: user.monthlyQuota - user.urlsUsedThisMonth,
+    totalQuota: user.monthlyQuota,
+  };
+}
+
+// Multi-tenant Job Management
+export function getJobsForUser(userId: string): IndexingJob[] {
+  return getStoreData().jobs.filter((j) => j.userId === userId);
+}
+
+export function getAllJobsAdmin(): IndexingJob[] {
   return getStoreData().jobs;
 }
 
@@ -76,11 +200,9 @@ export function saveJob(job: IndexingJob): void {
   if (idx >= 0) {
     store.jobs[idx] = job;
   } else {
-    store.jobs.unshift(job); // Add newest first
+    store.jobs.unshift(job);
   }
   saveStore();
-
-  // Notify subscribers (SSE streams)
   notifySubscribers(job);
 }
 
@@ -99,21 +221,54 @@ export function addJobLog(jobId: string, log: Omit<LogEntry, 'id' | 'timestamp'>
   saveJob(job);
 }
 
-export function getUserCredentials(): UserCredentials {
-  return getStoreData().credentials;
+// Encrypted Per-User Google API Credentials Management
+export function saveUserGoogleCredentials(userId: string, serviceAccountJson: string): void {
+  const user = getUserById(userId);
+  if (!user) return;
+
+  user.googleServiceAccountEncrypted = encryptData(serviceAccountJson);
+  saveUser(user);
 }
 
-export function saveUserCredentials(creds: Partial<UserCredentials>): UserCredentials {
-  const store = getStoreData();
-  store.credentials = {
-    ...store.credentials,
-    ...creds,
-  };
-  saveStore();
-  return store.credentials;
+export function getUserGoogleCredentials(userId: string): GoogleServiceAccount | null {
+  const user = getUserById(userId);
+  if (!user || !user.googleServiceAccountEncrypted) return null;
+
+  try {
+    const decryptedJson = decryptData(user.googleServiceAccountEncrypted);
+    if (!decryptedJson) return null;
+    return JSON.parse(decryptedJson);
+  } catch {
+    return null;
+  }
 }
 
-// Event Subscribers for SSE (Real-Time Live Feed)
+// Admin Management Functions
+export function approveUserPlan(userId: string, newTier: SubscriptionTier): void {
+  const user = getUserById(userId);
+  if (!user) return;
+
+  user.tier = newTier;
+  user.planStatus = 'active';
+  user.requestedTier = undefined;
+  user.monthlyQuota = PLAN_TIERS[newTier]?.monthlyQuota || user.monthlyQuota;
+  saveUser(user);
+}
+
+export function grantCustomQuota(userId: string, customQuota: number, customPrice?: number): void {
+  const user = getUserById(userId);
+  if (!user) return;
+
+  user.tier = 'custom';
+  user.planStatus = 'active';
+  user.monthlyQuota = customQuota;
+  if (customPrice !== undefined) {
+    user.customPriceAmount = customPrice;
+  }
+  saveUser(user);
+}
+
+// SSE Real-Time Event Subscribers
 export function subscribeToJobUpdates(callback: (job: IndexingJob) => void): () => void {
   if (!globalForStore.__indexnow_subscribers__) {
     globalForStore.__indexnow_subscribers__ = new Set();

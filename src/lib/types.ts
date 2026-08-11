@@ -4,6 +4,39 @@ export type SubmissionStatus = 'queued' | 'validating' | 'submitting' | 'success
 
 export type UrlStatus = 'pending' | 'checking_http' | 'indexnow_success' | 'ping_success' | 'google_success' | 'failed' | 'skipped';
 
+export type UserRole = 'user' | 'admin';
+
+export type SubscriptionTier = 'free' | 'starter' | 'pro' | 'custom';
+
+export type PlanStatus = 'active' | 'approval_pending' | 'cancelled';
+
+export interface PlanConfig {
+  id: SubscriptionTier;
+  name: string;
+  priceMonthly: number;
+  monthlyQuota: number;
+  description: string;
+  features: string[];
+}
+
+export interface UserAccount {
+  id: string;
+  email: string;
+  name: string;
+  passwordHash: string;
+  passwordSalt: string;
+  role: UserRole;
+  tier: SubscriptionTier;
+  planStatus: PlanStatus;
+  requestedTier?: SubscriptionTier;
+  monthlyQuota: number;
+  urlsUsedThisMonth: number;
+  customPriceAmount?: number;
+  currentPeriodStart: string;
+  createdAt: string;
+  googleServiceAccountEncrypted?: string; // Encrypted AES-256-GCM JSON string
+}
+
 export interface DispatchedEngineResult {
   engine: EngineType;
   endpoint: string;
@@ -27,6 +60,7 @@ export interface UrlSubmissionItem {
 
 export interface IndexingJob {
   id: string;
+  userId: string; // Multi-tenant isolation
   createdAt: string;
   updatedAt: string;
   totalUrls: number;
@@ -66,16 +100,72 @@ export interface GoogleServiceAccount {
   token_uri?: string;
 }
 
-export interface UserCredentials {
-  googleServiceAccount?: GoogleServiceAccount | null;
-  bingApiKey?: string | null;
-  indexNowKey?: string;
-}
-
 export interface IndexingStats {
   totalJobs: number;
   totalUrlsSubmitted: number;
   successRatePercent: number;
   activeDomainsCount: number;
   averageSpeedMs: number;
+  remainingQuota: number;
+  monthlyQuota: number;
+  tier: SubscriptionTier;
 }
+
+export const PLAN_TIERS: Record<SubscriptionTier, PlanConfig> = {
+  free: {
+    id: 'free',
+    name: 'Free Tier',
+    priceMonthly: 0,
+    monthlyQuota: 10,
+    description: 'Perfect for trying out instant indexing.',
+    features: [
+      '10 URLs / month',
+      'Instant IndexNow Protocol (Bing, Yandex)',
+      'Global Crawl Ping Network',
+      'Real-time SSE Telemetry Feed',
+      '7-day History Retention',
+    ],
+  },
+  starter: {
+    id: 'starter',
+    name: 'Starter Plan',
+    priceMonthly: 5,
+    monthlyQuota: 100,
+    description: 'Ideal for blogs, niche sites, and small businesses.',
+    features: [
+      '100 URLs / month',
+      'Everything in Free',
+      'Connect Own Google Indexing API',
+      'XML Sitemap Auto-Extractor',
+      '30-day History Retention',
+    ],
+  },
+  pro: {
+    id: 'pro',
+    name: 'Pro Plan',
+    priceMonthly: 15,
+    monthlyQuota: 500,
+    description: 'Designed for high-traffic sites, e-commerce & content creators.',
+    features: [
+      '500 URLs / month',
+      'Everything in Starter',
+      'Priority Queue Processing',
+      'Pre-flight HTTP 200 OK Inspector',
+      'CSV & JSON Audit Reports',
+    ],
+  },
+  custom: {
+    id: 'custom',
+    name: 'Agency / Custom',
+    priceMonthly: 0, // Custom Quote
+    monthlyQuota: 2500, // Custom Quota
+    description: 'Tailored for agencies, large enterprise networks, and high volume.',
+    features: [
+      'Custom URL Quota (2,500 - 100,000+ URLs)',
+      'Everything in Pro',
+      'Admin Granted Custom Pricing',
+      'Whitelabel Client PDF Reports',
+      'Dedicated Priority Account Support',
+    ],
+  },
+};

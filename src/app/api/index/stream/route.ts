@@ -1,4 +1,4 @@
-import { subscribeToJobUpdates, getAllJobs } from '@/lib/job-store';
+import { subscribeToJobUpdates, getAllJobsAdmin } from '@/lib/job-store';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,7 +8,7 @@ export async function GET() {
   const customStream = new ReadableStream({
     start(controller) {
       // Send initial connection ACK
-      const initData = `data: ${JSON.stringify({ type: 'connected', jobs: getAllJobs() })}\n\n`;
+      const initData = `data: ${JSON.stringify({ type: 'connected', jobs: getAllJobsAdmin() })}\n\n`;
       controller.enqueue(encoder.encode(initData));
 
       // Subscribe to store updates

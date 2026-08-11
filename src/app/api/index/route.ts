@@ -16,12 +16,24 @@ import { sendCrawlPing } from '@/lib/google-ping-driver';
 import { submitToGoogleIndexingApi } from '@/lib/google-indexing-driver';
 import {
   addJobLog,
-  getUserCredentials,
   saveJob,
+  checkAndDeductQuota,
+  getUserGoogleCredentials,
 } from '@/lib/job-store';
+import { getAuthenticatedUser } from '@/lib/auth';
+import { isSsrfSafeUrl } from '@/lib/security';
 
 export async function POST(req: Request) {
   try {
+    // 1. User Authentication & Session Check
+    const user = await getAuthenticatedUser(req);
+    if (!user) {
+      return NextResponse.json(
+        { success: false, error: 'Authentication required. Please log in or register to submit URLs.' },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json();
     const { rawInput, engines = ['indexnow', 'ping'], options = {} } = body;
 
@@ -34,11 +46,10 @@ export async function POST(req: Request) {
 
     let urlsToProcess: string[] = [];
 
-    // Check if input is a sitemap URL
+    // Parse Sitemap or Raw URLs
     if (isSitemapUrl(rawInput)) {
       urlsToProcess = await parseSitemapXml(rawInput.trim());
       if (urlsToProcess.length === 0) {
-        // Fallback to treat input itself as single URL if sitemap parsing returns empty
         urlsToProcess = parseRawUrlInput(rawInput);
       }
     } else {
@@ -49,6 +60,35 @@ export async function POST(req: Request) {
       return NextResponse.json(
         { success: false, error: 'No valid HTTP/HTTPS URLs were found in your input.' },
         { status: 400 }
+      );
+    }
+
+    // 2. Enterprise SSRF Protection Sanitizer
+    for (const targetUrl of urlsToProcess) {
+      const ssrfCheck = isSsrfSafeUrl(targetUrl);
+      if (!ssrfCheck.safe) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Security Violation: URL "${targetUrl}" rejected. ${ssrfCheck.reason}`,
+          },
+          { status: 400 }
+        );
+      }
+    }
+
+    // 3. User Monthly Quota Check
+    const quotaCheck = checkAndDeductQuota(user.id, urlsToProcess.length);
+    if (!quotaCheck.allowed) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: quotaCheck.errorMsg,
+          remainingQuota: quotaCheck.remaining,
+          totalQuota: quotaCheck.totalQuota,
+          upgradeRequired: true,
+        },
+        { status: 402 } // Payment / Quota Required
       );
     }
 
@@ -65,6 +105,7 @@ export async function POST(req: Request) {
 
     const newJob: IndexingJob = {
       id: jobId,
+      userId: user.id, // Multi-tenant isolation
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
       totalUrls: urlsToProcess.length,
@@ -79,7 +120,7 @@ export async function POST(req: Request) {
           id: 'log_1',
           timestamp: new Date().toISOString(),
           level: 'info',
-          message: `Job initialized with ${urlsToProcess.length} target URL(s).`,
+          message: `Job initialized for ${user.email} (${urlsToProcess.length} target URL(s)).`,
         },
       ],
       keyUsed: hostKey,
@@ -87,11 +128,9 @@ export async function POST(req: Request) {
 
     const origin = new URL(req.url).origin;
 
-    // Save job state initially
     saveJob(newJob);
 
-    // Run processing asynchronously in background worker process
-    processJobAsync(jobId, engines, { ...options, appBaseUrl: origin }, hostKey).catch((err) => {
+    processJobAsync(jobId, user.id, engines, { ...options, appBaseUrl: origin }, hostKey).catch((err) => {
       console.error(`Error processing job ${jobId}:`, err);
     });
 
@@ -100,6 +139,7 @@ export async function POST(req: Request) {
       jobId,
       message: `Job successfully created for ${urlsToProcess.length} URL(s).`,
       job: newJob,
+      remainingQuota: quotaCheck.remaining,
     });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Server error processing request';
@@ -112,19 +152,19 @@ export async function POST(req: Request) {
  */
 async function processJobAsync(
   jobId: string,
+  userId: string,
   engines: EngineType[],
   options: { performPreflight?: boolean; appBaseUrl?: string },
   hostKey: string
 ) {
-  const credentials = getUserCredentials();
-  
-  // 1. Update job state to validating/submitting
+  // Fetch user's own encrypted Google Service Account key if available
+  const userGoogleCreds = getUserGoogleCredentials(userId);
+
   addJobLog(jobId, {
     level: 'info',
     message: `Starting execution for engines: ${engines.join(', ').toUpperCase()}`,
   });
 
-  // Fetch job state
   const jobStoreModule = await import('@/lib/job-store');
   const job = jobStoreModule.getJobById(jobId);
   if (!job) return;
@@ -132,10 +172,9 @@ async function processJobAsync(
   job.status = 'submitting';
   jobStoreModule.saveJob(job);
 
-  // Group URLs by domain for IndexNow
   const urlsByHost = groupUrlsByHost(job.urls.map((u) => u.url));
 
-  // Step A: Perform pre-flight HTTP verification if requested
+  // Step A: Perform pre-flight HTTP verification
   if (options.performPreflight) {
     addJobLog(jobId, {
       level: 'info',
@@ -185,7 +224,6 @@ async function processJobAsync(
         });
       }
 
-      // Update URL statuses
       for (const item of job.urls) {
         if (extractDomain(item.url) === host) {
           item.engineResults.push(...results);
@@ -204,7 +242,7 @@ async function processJobAsync(
     addJobLog(jobId, {
       level: 'info',
       engine: 'ping',
-      message: 'Notifying Google & Bing sitemap ping crawler endpoints...',
+      message: 'Notifying crawler notification RPC endpoints...',
     });
 
     const primaryUrlOrHost = job.urls[0]?.url || 'https://example.com';
@@ -226,23 +264,23 @@ async function processJobAsync(
     }
   }
 
-  // Step D: Google Direct Indexing API Dispatch (Optional)
+  // Step D: Google Direct Indexing API Dispatch
   if (engines.includes('google_api')) {
-    if (!credentials.googleServiceAccount) {
+    if (!userGoogleCreds) {
       addJobLog(jobId, {
         level: 'warning',
         engine: 'google_api',
-        message: 'Google Indexing API selected, but no Google Service Account key was configured.',
+        message: 'Google Indexing API selected, but no Google Service Account key was configured in your account settings.',
       });
     } else {
       addJobLog(jobId, {
         level: 'info',
         engine: 'google_api',
-        message: 'Authenticating with Google Cloud Service Account and pushing URLs...',
+        message: 'Authenticating with user Google Service Account and pushing URLs...',
       });
 
       for (const item of job.urls) {
-        const res = await submitToGoogleIndexingApi(item.url, credentials.googleServiceAccount);
+        const res = await submitToGoogleIndexingApi(item.url, userGoogleCreds);
         item.engineResults.push(res);
 
         addJobLog(jobId, {
@@ -259,7 +297,6 @@ async function processJobAsync(
     }
   }
 
-  // Final job metric calculation
   let success = 0;
   let failed = 0;
 

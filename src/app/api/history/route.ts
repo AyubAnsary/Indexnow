@@ -1,10 +1,16 @@
 import { NextResponse } from 'next/server';
-import { getAllJobs, getUserCredentials } from '@/lib/job-store';
+import { getAuthenticatedUser } from '@/lib/auth';
+import { getJobsForUser, getUserGoogleCredentials } from '@/lib/job-store';
 
-export async function GET() {
+export async function GET(req: Request) {
   try {
-    const jobs = getAllJobs();
-    const credentials = getUserCredentials();
+    const user = await getAuthenticatedUser(req);
+    if (!user) {
+      return NextResponse.json({ success: false, jobs: [], stats: null }, { status: 401 });
+    }
+
+    const jobs = getJobsForUser(user.id);
+    const hasGoogleCreds = !!getUserGoogleCredentials(user.id);
 
     let totalUrlsSubmitted = 0;
     let totalSuccessCount = 0;
@@ -26,15 +32,17 @@ export async function GET() {
       totalUrlsSubmitted,
       successRatePercent,
       activeDomainsCount: domainSet.size,
-      averageSpeedMs: 180, // Avg IndexNow broadcast response latency
+      averageSpeedMs: 180,
+      remainingQuota: Math.max(0, user.monthlyQuota - user.urlsUsedThisMonth),
+      monthlyQuota: user.monthlyQuota,
+      tier: user.tier,
     };
 
     return NextResponse.json({
       success: true,
       stats,
       jobs,
-      hasGoogleCreds: !!credentials.googleServiceAccount,
-      hasBingCreds: !!credentials.bingApiKey,
+      hasGoogleCreds,
     });
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : 'Server error fetching history';

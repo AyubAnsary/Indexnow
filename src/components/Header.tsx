@@ -1,17 +1,34 @@
 'use client';
 
 import React from 'react';
-import { Zap, Key, RefreshCw, Layers, Sparkles } from 'lucide-react';
+import { Zap, Key, User, LogOut, Shield, Sparkles, Layers, ArrowUpRight } from 'lucide-react';
+import { SubscriptionTier, UserRole } from '@/lib/types';
 
 interface HeaderProps {
+  currentUser: {
+    name: string;
+    email: string;
+    role: UserRole;
+    tier: SubscriptionTier;
+    remainingQuota: number;
+    monthlyQuota: number;
+    hasGoogleCreds: boolean;
+  } | null;
+  onOpenAuth: () => void;
+  onLogout: () => void;
   onOpenCredentials: () => void;
-  hasGoogleCreds: boolean;
+  onOpenPricing: () => void;
+  onOpenAdmin: () => void;
   activeJobsCount: number;
 }
 
 export default function Header({
+  currentUser,
+  onOpenAuth,
+  onLogout,
   onOpenCredentials,
-  hasGoogleCreds,
+  onOpenPricing,
+  onOpenAdmin,
   activeJobsCount,
 }: HeaderProps) {
   return (
@@ -31,7 +48,7 @@ export default function Header({
                 IndexPulse
               </h1>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                PRO ENGINE v2.0
+                ENTERPRISE ENGINE
               </span>
             </div>
             <p className="text-xs text-slate-400 flex items-center space-x-1">
@@ -42,39 +59,82 @@ export default function Header({
           </div>
         </div>
 
-        {/* Engine Status Badges & Controls */}
+        {/* User Workspace & Controls */}
         <div className="flex items-center space-x-3">
-          {/* IndexNow Status Pill */}
-          <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-slate-800 text-xs text-slate-300">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="font-mono text-slate-300">IndexNow Broadcast:</span>
-            <span className="text-emerald-400 font-semibold">ONLINE</span>
-          </div>
+          {currentUser ? (
+            <>
+              {/* Admin Panel Trigger (If Admin) */}
+              {currentUser.role === 'admin' && (
+                <button
+                  onClick={onOpenAdmin}
+                  className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold transition shadow-md"
+                >
+                  <Shield className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Admin Panel</span>
+                </button>
+              )}
 
-          {/* Active Job Indicator */}
-          {activeJobsCount > 0 && (
-            <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-xs text-indigo-300 animate-pulse">
-              <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-              <span>Indexing {activeJobsCount} Active Job(s)...</span>
-            </div>
+              {/* Monthly Quota Indicator Pill */}
+              <button
+                onClick={onOpenPricing}
+                className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs transition"
+              >
+                <span className="text-slate-400">Quota:</span>
+                <span className="font-mono text-emerald-400 font-bold">
+                  {currentUser.remainingQuota} / {currentUser.monthlyQuota.toLocaleString()}
+                </span>
+                <span className="uppercase text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                  {currentUser.tier}
+                </span>
+              </button>
+
+              {/* Connect Google API Key */}
+              <button
+                onClick={onOpenCredentials}
+                className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition border ${
+                  currentUser.hasGoogleCreds
+                    ? 'bg-slate-900 border-slate-800 text-slate-200 hover:bg-slate-800'
+                    : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/30'
+                }`}
+              >
+                <Key className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="hidden sm:inline">
+                  {currentUser.hasGoogleCreds ? 'Google Key OK' : 'Connect Google API'}
+                </span>
+              </button>
+
+              {/* Upgrade Plan Button */}
+              <button
+                onClick={onOpenPricing}
+                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-md transition"
+              >
+                <span>Plans</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+
+              {/* User Profile Avatar & Logout */}
+              <div className="flex items-center space-x-2 pl-2 border-l border-slate-800">
+                <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-white uppercase">
+                  {currentUser.name.substring(0, 2)}
+                </div>
+                <button
+                  onClick={onLogout}
+                  title="Sign Out"
+                  className="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-900 transition"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            </>
+          ) : (
+            <button
+              onClick={onOpenAuth}
+              className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-bold text-xs shadow-lg shadow-cyan-500/20 transition"
+            >
+              <User className="w-4 h-4" />
+              <span>Sign In / Register</span>
+            </button>
           )}
-
-          {/* Google Credentials Status / Setup Button */}
-          <button
-            onClick={onOpenCredentials}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border shadow-md ${
-              hasGoogleCreds
-                ? 'bg-slate-900 border-slate-700 text-slate-200 hover:bg-slate-800 hover:border-slate-600'
-                : 'bg-gradient-to-r from-indigo-600 to-violet-600 border-indigo-500/40 text-white hover:from-indigo-500 hover:to-violet-500 shadow-indigo-600/20 hover:shadow-indigo-600/40'
-            }`}
-          >
-            <Key className="w-4 h-4 text-cyan-400" />
-            <span>{hasGoogleCreds ? 'API Key Configured' : 'Connect Google API'}</span>
-            {!hasGoogleCreds && <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-spin" />}
-          </button>
 
         </div>
       </div>
