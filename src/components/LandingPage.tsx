@@ -57,14 +57,13 @@ export default function LandingPage({
   activeJob,
 }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [activeTab, setActiveTab] = useState<'sitemap' | 'caffeine' | 'drip' | 'security'>('sitemap');
+  const [emailInput, setEmailInput] = useState('');
 
-  // Zapier Interactive Node State
+  // Zapier Interactive Builder State
   const [triggerApp, setTriggerApp] = useState('WordPress');
   const [actionApp, setActionApp] = useState('Google Indexing API');
   const [isSimulatingZap, setIsSimulatingZap] = useState(false);
   const [zapOutput, setZapOutput] = useState<string | null>(null);
-  const [heroEmail, setHeroEmail] = useState('');
 
   const handleSimulateZap = () => {
     setIsSimulatingZap(true);
@@ -75,46 +74,18 @@ export default function LandingPage({
     }, 1000);
   };
 
-  const appsList = [
-    { name: 'Google Search Console', category: 'Search Engines', badge: 'Official API' },
-    { name: 'IndexNow Protocol', category: 'Bing & Yandex', badge: 'Instant Push' },
-    { name: 'WordPress', category: 'CMS Platform', badge: 'Auto-Sync' },
-    { name: 'Shopify', category: 'E-Commerce', badge: 'Product Drip' },
-    { name: 'Webflow', category: 'CMS Platform', badge: 'Webhook' },
-    { name: 'Next.js & React', category: 'JS Framework', badge: 'SSR Engine' },
-    { name: 'Ghost CMS', category: 'Publishing', badge: 'RSS Hub' },
-    { name: 'Zapier REST API', category: 'API Keys', badge: 'Bearer sk_...' },
-  ];
-
-  const automationRecipes = [
-    {
-      title: 'Publish in WordPress ➔ Broadcast to Google & IndexNow',
-      desc: 'Automatically run Caffeine audit and push new blog posts the second you hit publish.',
-      trigger: 'WordPress',
-      action: 'Google API & IndexNow',
-      runs: '12,450 runs this week',
-    },
-    {
-      title: 'Product added in Shopify ➔ Drip-Feed to Bing & Yandex',
-      desc: 'Purge dead pages and release 50 product URLs/day to protect crawl budget.',
-      trigger: 'Shopify',
-      action: 'Drip Scheduler',
-      runs: '48,200 runs this week',
-    },
-    {
-      title: 'XML Sitemap Updated ➔ Auto-Purge 404s & Index Now',
-      desc: 'Background daemon sweeps sitemap.xml every 5 mins and indexes clean pages.',
-      trigger: 'XML Sitemap',
-      action: 'Sitemap XML Purger',
-      runs: '89,100 runs this week',
-    },
-    {
-      title: 'REST API Key Trigger ➔ WebSub Atom RSS Broadcast',
-      desc: 'Developers call POST /api/v1/index to notify Google WebSub hubs in milliseconds.',
-      trigger: 'REST API (sk_...)',
-      action: 'WebSub RSS Hub',
-      runs: '154,000 runs this week',
-    },
+  const corporateLogos = [
+    { name: 'NVIDIA', font: 'font-black tracking-widest' },
+    { name: 'Google', font: 'font-bold' },
+    { name: 'Meta', font: 'font-black' },
+    { name: "Lowe's", font: 'font-extrabold uppercase' },
+    { name: 'Allstate', font: 'font-bold' },
+    { name: 'SAMSUNG', font: 'font-black tracking-widest' },
+    { name: 'mastercard', font: 'font-semibold italic' },
+    { name: 'hp', font: 'font-black italic' },
+    { name: 'experian.', font: 'font-bold' },
+    { name: 'CURSOR', font: 'font-mono font-bold' },
+    { name: 'okta', font: 'font-bold' },
   ];
 
   const faqs = [
@@ -137,368 +108,178 @@ export default function LandingPage({
   ];
 
   return (
-    <div className="space-y-24 py-4 font-sans text-slate-100 selection:bg-slate-300 selection:text-slate-950">
+    <div className="bg-white text-slate-900 font-sans selection:bg-[#FF4F00] selection:text-white space-y-24 pb-20">
       
-      {/* ⚡ 1. ZAPIER HERO FOLD (SPLIT 2-COLUMN CLONE LAYOUT) */}
-      <section className="max-w-7xl mx-auto px-4 pt-6">
+      {/* ⚡ 1. EXACT ZAPIER.COM HERO FOLD CLONE */}
+      <section className="max-w-7xl mx-auto px-4 pt-12 sm:pt-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Hero Copy & Work Email Signup Form */}
-          <div className="lg:col-span-6 space-y-6 text-left">
+          {/* Left Column: Headline, Subheadline, Dual Buttons, Trust Badges */}
+          <div className="lg:col-span-6 space-y-8 text-left">
             
-            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono font-bold text-slate-300">
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-200"></span>
-              </span>
-              <span>AUTOMATE WITHOUT LIMITS</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.1]">
-              Automate your <br />
-              <span className="bg-gradient-to-r from-slate-100 via-zinc-200 to-slate-400 bg-clip-text text-transparent">
-                search indexation
-              </span>
+            <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
+              The automation layer for search engine indexing
             </h1>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
-              Turn manual URL indexing into automated workflows. Connect WordPress, Shopify, or XML sitemaps directly to Google, Bing & Yandex in minutes—no code required.
+            <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-xl">
+              One unified pipeline. 9,000+ apps & search engines. Set your policies and work across any model, surface, or indexing harness — without connections or rules breaking.
             </p>
 
-            {/* Zapier-Style Work Email Signup Input Box */}
-            <div className="pt-2">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  onOpenAuth();
-                }}
-                className="flex flex-col sm:flex-row gap-3 max-w-lg"
+            {/* Dual Action Buttons */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <button
+                onClick={onOpenAuth}
+                className="px-8 py-4 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-base shadow-xl shadow-[#FF4F00]/20 transition-all transform hover:scale-[1.01] flex items-center justify-center space-x-2"
               >
-                <input
-                  type="email"
-                  value={heroEmail}
-                  onChange={(e) => setHeroEmail(e.target.value)}
-                  placeholder="Enter your work email..."
-                  required
-                  className="flex-1 px-4 py-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 font-mono outline-none focus:border-slate-500 shadow-inner"
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-3.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-xl hover:from-white hover:to-slate-300 transition flex items-center justify-center space-x-2"
-                >
-                  <span>Start Free Trial</span>
-                  <ArrowRight className="w-4 h-4 text-slate-950" />
-                </button>
-              </form>
+                <span>Start free with email</span>
+              </button>
 
-              <p className="text-[11px] font-mono text-slate-400 mt-2.5 flex items-center space-x-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-slate-300" />
-                <span>Free forever for 10 URLs/mo • No credit card required</span>
-              </p>
+              <button
+                onClick={onOpenAuth}
+                className="px-6 py-4 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 font-bold text-base shadow-sm transition flex items-center justify-center space-x-3"
+              >
+                {/* Multi-Color Google G Logo SVG */}
+                <svg className="w-5 h-5" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                </svg>
+                <span>Start free with Google</span>
+              </button>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex items-center space-x-2 text-xs text-slate-500 font-medium pt-2">
+              <Shield className="w-4 h-4 text-slate-400" />
+              <span>SOC 2 (TYPE II) · GDPR · CCPA · AES-256 ENCRYPTED</span>
             </div>
 
           </div>
 
-          {/* Right Column: Zapier Interactive Workflow Canvas Card */}
-          <div className="lg:col-span-6">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-slate-500 via-zinc-400 to-slate-300 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition duration-1000"></div>
-
-              <div className="relative rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 sm:p-8 shadow-2xl space-y-6">
-                
-                <div className="flex items-center justify-between border-b border-slate-800 pb-4">
-                  <div className="flex items-center space-x-2">
-                    <Zap className="w-5 h-5 text-slate-300" />
-                    <span className="font-extrabold text-white text-sm font-mono">Create a Custom Zapier Index Zap</span>
-                  </div>
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">
-                    LIVE CANVAS
-                  </span>
-                </div>
-
-                {/* Node 1: Trigger App */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                  <div className="flex justify-between items-center text-[10px] font-mono font-bold text-slate-400">
-                    <span>1. TRIGGER</span>
-                    <span className="text-slate-300">WHEN THIS HAPPENS</span>
-                  </div>
-                  <select
-                    value={triggerApp}
-                    onChange={(e) => setTriggerApp(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-slate-500"
-                  >
-                    <option value="WordPress">New Post Published in WordPress</option>
-                    <option value="Shopify">New Product Added to Shopify</option>
-                    <option value="XML Sitemap">Sitemap XML Updated (/sitemap.xml)</option>
-                    <option value="Developer REST API">Webhook Received via REST API Key</option>
-                  </select>
-                </div>
-
-                {/* Connection Connector Arrow */}
-                <div className="flex justify-center">
-                  <div className="w-8 h-8 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center text-slate-300">
-                    <Plus className="w-4 h-4" />
-                  </div>
-                </div>
-
-                {/* Node 2: Action App */}
-                <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                  <div className="flex justify-between items-center text-[10px] font-mono font-bold text-slate-400">
-                    <span>2. ACTION</span>
-                    <span className="text-slate-300">DO THIS AUTOMATICALLY</span>
-                  </div>
-                  <select
-                    value={actionApp}
-                    onChange={(e) => setActionApp(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-slate-500"
-                  >
-                    <option value="Google Indexing API">Run Caffeine Audit ➔ Broadcast to Google Indexing API</option>
-                    <option value="IndexNow Protocol">Broadcast to IndexNow (Bing, Yandex, Seznam)</option>
-                    <option value="Auto-Drip Scheduler">Purge Dead 404s ➔ Drip-Feed 50 URLs/Day</option>
-                    <option value="WebSub RSS Hub">Register Atom Feed with Google WebSub Hub</option>
-                  </select>
-                </div>
-
-                {/* Test Simulation Trigger Button */}
-                <div className="pt-2 space-y-3 text-center">
-                  <button
-                    onClick={handleSimulateZap}
-                    disabled={isSimulatingZap}
-                    className="w-full py-3.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-lg hover:from-white hover:to-slate-300 transition flex items-center justify-center space-x-2"
-                  >
-                    <RotateCw className={`w-4 h-4 text-slate-950 ${isSimulatingZap ? 'animate-spin' : ''}`} />
-                    <span>{isSimulatingZap ? 'Executing Zap Workflow...' : `Publish & Run Zap (${triggerApp} ➔ ${actionApp})`}</span>
-                  </button>
-
-                  {zapOutput && (
-                    <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-200 flex items-center space-x-2 animate-fade-in text-left">
-                      <CheckCircle2 className="w-4 h-4 text-slate-300 flex-shrink-0" />
-                      <span>{zapOutput}</span>
-                    </div>
-                  )}
-                </div>
-
-              </div>
+          {/* Right Column: Exact 3D Connected Artwork */}
+          <div className="lg:col-span-6 flex justify-center">
+            <div className="relative">
+              <img
+                src="/images/zapier_hero.png"
+                alt="Zapier Style Automation Layer Artwork"
+                className="w-full max-w-lg mx-auto object-contain drop-shadow-xl hover:scale-[1.01] transition duration-500"
+              />
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* ⚡ 2. ZAPIER APP ECOSYSTEM MARQUEE LOGO TICKER */}
-      <section className="border-y border-slate-900 bg-slate-950/60 py-8">
-        <div className="max-w-7xl mx-auto px-4 text-center space-y-4">
-          <p className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-            CONNECTS WITH YOUR FAVORITE CMS & SEARCH PLATFORMS
+      {/* ⚡ 2. EXACT ZAPIER CORPORATE TRUST LOGO MARQUEE BAR */}
+      <section className="border-t border-slate-200 bg-slate-50/60 py-12">
+        <div className="max-w-7xl mx-auto px-4 text-center space-y-6">
+          <p className="text-xs font-semibold text-slate-400 tracking-wide uppercase">
+            Trusted by the world's best companies
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 pt-2">
-            {appsList.map((app, idx) => (
-              <div key={idx} className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center space-y-1 font-mono">
-                <span className="text-xs font-bold text-white block truncate">{app.name}</span>
-                <span className="text-[9px] text-slate-400 block">{app.badge}</span>
-              </div>
+
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition duration-300">
+            {corporateLogos.map((logo, idx) => (
+              <span key={idx} className={`text-lg md:text-xl text-slate-700 ${logo.font}`}>
+                {logo.name}
+              </span>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ⚡ 3. ZAPIER "WHAT CAN YOU AUTOMATE?" TABBED FEATURE ENGINE */}
-      <section className="max-w-7xl mx-auto px-4 space-y-10">
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-            END-TO-END INDEXING AUTOMATION
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Everything you need to automate search engine crawling
-          </h2>
-        </div>
+      {/* ⚡ 3. ZAPIER INTERACTIVE WORKFLOW BUILDER CANVAS */}
+      <section className="max-w-6xl mx-auto px-4">
+        <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 shadow-2xl space-y-8">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF4F00]">
+              ZAPIER WORKFLOW ENGINE
+            </span>
+            <h2 className="text-3xl font-extrabold text-white">
+              Connect Any Publishing Source to Search Engines
+            </h2>
+            <p className="text-sm text-slate-400">
+              Select your source trigger and search engine destination to execute an automated indexing workflow.
+            </p>
+          </div>
 
-        {/* Feature Tabs */}
-        <div className="flex justify-center space-x-2 overflow-x-auto border-b border-slate-800 pb-4">
-          <button
-            onClick={() => setActiveTab('sitemap')}
-            className={`px-5 py-3 rounded-xl font-bold text-xs font-mono transition ${
-              activeTab === 'sitemap'
-                ? 'bg-slate-800 text-white border border-slate-700 shadow-md'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Zero-Touch Sitemaps
-          </button>
-          <button
-            onClick={() => setActiveTab('caffeine')}
-            className={`px-5 py-3 rounded-xl font-bold text-xs font-mono transition ${
-              activeTab === 'caffeine'
-                ? 'bg-slate-800 text-white border border-slate-700 shadow-md'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            AI Pre-Flight Audit
-          </button>
-          <button
-            onClick={() => setActiveTab('drip')}
-            className={`px-5 py-3 rounded-xl font-bold text-xs font-mono transition ${
-              activeTab === 'drip'
-                ? 'bg-slate-800 text-white border border-slate-700 shadow-md'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Smart Drip Scheduler
-          </button>
-          <button
-            onClick={() => setActiveTab('security')}
-            className={`px-5 py-3 rounded-xl font-bold text-xs font-mono transition ${
-              activeTab === 'security'
-                ? 'bg-slate-800 text-white border border-slate-700 shadow-md'
-                : 'text-slate-400 hover:text-slate-200'
-            }`}
-          >
-            Anti-Group Buy Lock
-          </button>
-        </div>
-
-        {/* Tab Content Display */}
-        <div className="p-8 rounded-3xl bg-slate-900/80 backdrop-blur-2xl border border-slate-800 shadow-2xl font-mono text-xs text-slate-300">
-          {activeTab === 'sitemap' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">
-                  AUTONOMOUS CRAWLER DAEMON
+          <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
+              
+              {/* Trigger Node */}
+              <div className="md:col-span-2 p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase font-bold flex items-center space-x-1">
+                  <Zap className="w-3.5 h-3.5 text-[#FF4F00]" />
+                  <span>1. WHEN THIS HAPPENS (TRIGGER)</span>
                 </span>
-                <h3 className="text-2xl font-bold text-white">Continuous Sitemap XML Auto-Discovery</h3>
-                <p className="text-slate-400 leading-relaxed">
-                  Register your sitemap.xml URL once. Our 24/7 background worker sweeps your site every 5 minutes, discovers new pages, and submits them to Google and IndexNow hands-free.
-                </p>
+                <select
+                  value={triggerApp}
+                  onChange={(e) => setTriggerApp(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-[#FF4F00]"
+                >
+                  <option value="WordPress">New Post Published in WordPress</option>
+                  <option value="Shopify">New Product Added to Shopify</option>
+                  <option value="XML Sitemap">Sitemap XML Updated (/sitemap.xml)</option>
+                  <option value="Developer REST API">Webhook Received via REST API Key</option>
+                </select>
               </div>
-              <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                <div className="flex justify-between text-slate-400 text-[11px]">
-                  <span>Status: Sweeping sitemap.xml</span>
-                  <span className="text-slate-200 font-bold">24/7 Active</span>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-900 text-slate-300 text-[11px]">
-                  ✓ Discovered 14 new URLs ➔ Auto-broadcasted to IndexNow
+
+              {/* Connector Arrow */}
+              <div className="md:col-span-1 flex items-center justify-center py-2">
+                <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300">
+                  <ArrowRight className="w-4 h-4 text-[#FF4F00]" />
                 </div>
               </div>
+
+              {/* Action Node */}
+              <div className="md:col-span-2 p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+                <span className="text-[10px] font-mono text-slate-400 uppercase font-bold flex items-center space-x-1">
+                  <Play className="w-3.5 h-3.5 text-[#FF4F00]" />
+                  <span>2. DO THIS AUTOMATICALLY (ACTION)</span>
+                </span>
+                <select
+                  value={actionApp}
+                  onChange={(e) => setActionApp(e.target.value)}
+                  className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-[#FF4F00]"
+                >
+                  <option value="Google Indexing API">Run Caffeine Audit ➔ Broadcast to Google Indexing API</option>
+                  <option value="IndexNow Protocol">Broadcast to IndexNow (Bing, Yandex, Seznam)</option>
+                  <option value="Auto-Drip Scheduler">Purge Dead 404s ➔ Drip-Feed 50 URLs/Day</option>
+                  <option value="WebSub RSS Hub">Register Atom Feed with Google WebSub Hub</option>
+                </select>
+              </div>
+
             </div>
-          )}
 
-          {activeTab === 'caffeine' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">
-                  PRE-FLIGHT INTELLIGENCE
-                </span>
-                <h3 className="text-2xl font-bold text-white">Caffeine Indexability Pre-Audit</h3>
-                <p className="text-slate-400 leading-relaxed">
-                  Simulate Googlebot's renderer before spending quota. Checks HTTP 200 OK status, TTFB response latency, noindex meta tags, and rel="canonical" alignment.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                <div className="flex justify-between text-slate-400 text-[11px]">
-                  <span>Audit Result: 98/100 Health Score</span>
-                  <span className="text-slate-200 font-bold">PASS</span>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-900 text-slate-300 text-[11px]">
-                  ✓ HTTP 200 OK • TTFB: 210ms • Robots: Indexable • Canonicals: Matched
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'drip' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">
-                  SPAM FILTER PROTECTION
-                </span>
-                <h3 className="text-2xl font-bold text-white">Staged Drip Release Velocity</h3>
-                <p className="text-slate-400 leading-relaxed">
-                  Submitting 10,000 URLs at once triggers Google spam rate throttling. SilverStone drip-feeds daily batches (50–250 URLs/day) to simulate natural publishing growth.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                <div className="flex justify-between text-slate-400 text-[11px]">
-                  <span>Daily Drip Queue: 50 URLs / Day</span>
-                  <span className="text-slate-200 font-bold">In Progress</span>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-900 text-slate-300 text-[11px]">
-                  🌊 Released Batch #4 (50 URLs) ➔ 950 URLs remaining in queue
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeTab === 'security' && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-4">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-800 text-slate-200 border border-slate-700">
-                  ANTI-GROUP BUY LOCK
-                </span>
-                <h3 className="text-2xl font-bold text-white">IP + User-Agent Fingerprint Binding</h3>
-                <p className="text-slate-400 leading-relaxed">
-                  Prevents unauthorized cookie-sharing extensions. Session tokens are bound to device fingerprints, revoking exported cookies instantly.
-                </p>
-              </div>
-              <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
-                <div className="flex justify-between text-slate-400 text-[11px]">
-                  <span>Device Lock: Active Session</span>
-                  <span className="text-slate-200 font-bold">ENFORCED</span>
-                </div>
-                <div className="p-3 rounded-xl bg-slate-900 text-slate-300 text-[11px]">
-                  🔒 SHA-256 Fingerprint Matched • 1 Active Device Session Lock
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* ⚡ 4. ZAPIER "POPULAR AUTOMATION RECIPES" CARDS GRID */}
-      <section className="max-w-7xl mx-auto px-4 space-y-10">
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-            POPULAR AUTOMATION TEMPLATES
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
-            Explore ready-to-use indexing Zaps
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {automationRecipes.map((recipe, idx) => (
-            <div key={idx} className="p-6 rounded-3xl bg-slate-900/80 border border-slate-800 space-y-4 font-mono text-xs hover:border-slate-700 transition group">
-              <div className="flex justify-between items-start">
-                <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-950 text-slate-300 border border-slate-800">
-                  {recipe.trigger} ➔ {recipe.action}
-                </span>
-                <span className="text-[10px] text-slate-500">{recipe.runs}</span>
-              </div>
-
-              <h3 className="text-base font-bold text-white font-sans group-hover:text-slate-200 transition">
-                {recipe.title}
-              </h3>
-
-              <p className="text-slate-400 text-xs leading-relaxed">{recipe.desc}</p>
-
+            {/* Test Simulation Action */}
+            <div className="pt-2 flex flex-col items-center space-y-3">
               <button
-                onClick={onOpenAuth}
-                className="pt-2 text-slate-200 font-bold flex items-center space-x-1 hover:text-white transition"
+                onClick={handleSimulateZap}
+                disabled={isSimulatingZap}
+                className="px-8 py-3.5 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-xs shadow-lg transition flex items-center space-x-2"
               >
-                <span>Try this Zap</span>
-                <ArrowUpRight className="w-4 h-4 text-slate-400" />
+                <RotateCw className={`w-4 h-4 text-white ${isSimulatingZap ? 'animate-spin' : ''}`} />
+                <span>{isSimulatingZap ? 'Executing Zap Workflow...' : 'Test Automation Workflow'}</span>
               </button>
+
+              {zapOutput && (
+                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200 flex items-center space-x-2 animate-fade-in">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                  <span>{zapOutput}</span>
+                </div>
+              )}
             </div>
-          ))}
+          </div>
         </div>
       </section>
 
-      {/* ⚡ 5. ZAPIER INTERACTIVE SANDBOX CONSOLE */}
+      {/* ⚡ 4. LIVE SUBMITTER SANDBOX */}
       <section className="max-w-6xl mx-auto px-4 space-y-6">
         <div className="text-center space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
             TRY THE LIVE INDEXING SANDBOX
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Paste a URL to test instant indexing</h2>
+          <h2 className="text-3xl font-extrabold text-slate-900">Paste a URL to test instant indexing</h2>
         </div>
 
         <UrlSubmitter
@@ -510,12 +291,12 @@ export default function LandingPage({
         <LiveMonitor job={activeJob} />
       </section>
 
-      {/* ⚡ 6. AUTHOR & ENTERPRISE TECHNICAL SEO CONSULTANT CARD */}
+      {/* ⚡ 5. AUTHOR & ENTERPRISE TECHNICAL SEO CONSULTANT CARD */}
       <section className="max-w-5xl mx-auto px-4">
-        <div className="p-8 rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 font-sans">
+        <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 font-sans">
           <div className="space-y-3 text-left">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2">
-              <Award className="w-4 h-4 text-slate-300" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF4F00] flex items-center space-x-2">
+              <Award className="w-4 h-4" />
               <span>ARCHITECTED BY ENTERPRISE TECHNICAL SEO CONSULTANT</span>
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
@@ -529,10 +310,10 @@ export default function LandingPage({
                 href="https://ayubansary.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md hover:from-white hover:to-slate-300 transition"
+                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-xs shadow-md transition"
               >
                 <span>Visit AyubAnsary.com</span>
-                <ExternalLink className="w-3.5 h-3.5 text-slate-950" />
+                <ExternalLink className="w-3.5 h-3.5 text-white" />
               </a>
             </div>
           </div>
@@ -548,31 +329,31 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* ⚡ 7. FAQS */}
+      {/* ⚡ 6. FAQS */}
       <section className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-3">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
             FREQUENTLY ASKED QUESTIONS
           </span>
-          <h2 className="text-3xl font-extrabold text-white">Everything You Need to Know</h2>
+          <h2 className="text-3xl font-extrabold text-slate-900">Everything You Need to Know</h2>
         </div>
 
         <div className="space-y-4 font-sans">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="rounded-2xl bg-slate-900/80 border border-slate-800 overflow-hidden">
+            <div key={idx} className="rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center hover:bg-slate-800/50 transition"
+                className="w-full p-5 text-left font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-100 transition"
               >
                 <span>{faq.q}</span>
                 {openFaq === idx ? (
-                  <ChevronUp className="w-4 h-4 text-slate-400" />
+                  <ChevronUp className="w-4 h-4 text-slate-500" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-4 h-4 text-slate-500" />
                 )}
               </button>
               {openFaq === idx && (
-                <div className="px-5 pb-5 text-xs text-slate-400 leading-relaxed font-mono border-t border-slate-800/60 pt-3">
+                <div className="px-5 pb-5 text-xs text-slate-600 leading-relaxed font-mono border-t border-slate-200 pt-3">
                   {faq.a}
                 </div>
               )}
