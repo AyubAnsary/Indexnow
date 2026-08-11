@@ -29,6 +29,8 @@ import {
   Trash2,
   Play,
   Cpu,
+  Search,
+  Printer,
 } from 'lucide-react';
 import UrlSubmitter from './UrlSubmitter';
 import LiveMonitor from './LiveMonitor';
@@ -36,6 +38,8 @@ import HistoryDashboard from './HistoryDashboard';
 import CredentialsModal from './CredentialsModal';
 import AdminPanelModal from './AdminPanelModal';
 import PricingModal from './PricingModal';
+import UrlTrackerTab from './UrlTrackerTab';
+import WhiteLabelReportModal from './WhiteLabelReportModal';
 import { IndexingJob, IndexingStats, SubscriptionTier, UserRole, SitemapMonitor, ApiKey } from '@/lib/types';
 
 interface UserPanelProps {
@@ -71,10 +75,11 @@ export default function UserPanel({
   onRefreshData,
   onRequestUpgrade,
 }: UserPanelProps) {
-  const [activeTab, setActiveTab] = useState<'submitter' | 'monitors' | 'apikeys' | 'analytics' | 'credentials' | 'billing'>('submitter');
+  const [activeTab, setActiveTab] = useState<'submitter' | 'tracker' | 'monitors' | 'apikeys' | 'analytics' | 'credentials' | 'billing'>('submitter');
   const [isCredentialsOpen, setIsCredentialsOpen] = useState(false);
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isReportOpen, setIsReportOpen] = useState(false);
 
   // Sitemap Monitor State
   const [monitors, setMonitors] = useState<SitemapMonitor[]>([]);
@@ -214,14 +219,20 @@ export default function UserPanel({
     } catch {}
   };
 
+  const handleReIndexUrls = async (urls: string[]) => {
+    await onSubmit({
+      rawInput: urls.join('\n'),
+      engines: ['indexnow', 'ping'],
+      performPreflight: true,
+    });
+  };
+
   return (
     <div className="space-y-8 animate-fade-in">
       
       {/* Executive User Workspace Header Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-6 md:p-8 shadow-2xl shadow-slate-950/40">
-        {/* Glow backdrop accent */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-slate-400/15 via-zinc-400/10 to-slate-200/0 rounded-full blur-3xl pointer-events-none"></div>
-
+        
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           
           {/* User Profile Info */}
@@ -258,7 +269,7 @@ export default function UserPanel({
             </div>
           </div>
 
-          {/* Quota Progress Gauge Card */}
+          {/* Quota Progress & White-Label Export */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-slate-950/80 rounded-2xl p-4 border border-slate-800 shadow-inner">
             <div className="space-y-1 min-w-[180px]">
               <div className="flex justify-between items-center text-xs font-mono">
@@ -266,7 +277,6 @@ export default function UserPanel({
                 <span className="text-slate-200 font-bold">{quotaPercent}% Used</span>
               </div>
 
-              {/* Progress Bar */}
               <div className="w-full bg-slate-900 rounded-full h-2 overflow-hidden border border-slate-800">
                 <div
                   className={`h-full transition-all duration-500 rounded-full ${
@@ -284,13 +294,23 @@ export default function UserPanel({
               </div>
             </div>
 
-            <button
-              onClick={() => setIsPricingOpen(true)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-extrabold text-xs shadow-md shadow-slate-400/20 transition flex items-center justify-center space-x-1.5"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-slate-950" />
-              <span>Upgrade Quota</span>
-            </button>
+            <div className="flex items-center space-x-2">
+              <button
+                onClick={() => setIsReportOpen(true)}
+                className="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition flex items-center space-x-1.5"
+              >
+                <Printer className="w-3.5 h-3.5 text-slate-300" />
+                <span>Export PDF Report</span>
+              </button>
+
+              <button
+                onClick={() => setIsPricingOpen(true)}
+                className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-extrabold text-xs shadow-md transition flex items-center justify-center space-x-1.5"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-slate-950" />
+                <span>Upgrade</span>
+              </button>
+            </div>
           </div>
 
         </div>
@@ -307,6 +327,18 @@ export default function UserPanel({
           >
             <Zap className="w-4 h-4 text-slate-300" />
             <span>Instant Submitter</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('tracker')}
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
+              activeTab === 'tracker'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+            }`}
+          >
+            <Search className="w-4 h-4 text-slate-300" />
+            <span>Live URL Index Tracker</span>
           </button>
 
           <button
@@ -335,7 +367,7 @@ export default function UserPanel({
             }`}
           >
             <Terminal className="w-4 h-4 text-slate-300" />
-            <span>Developer REST API Keys</span>
+            <span>Developer REST API</span>
           </button>
 
           <button
@@ -408,7 +440,20 @@ export default function UserPanel({
           </motion.div>
         )}
 
-        {/* 🔄 Auto-Sitemap Monitor Tab */}
+        {/* 🔍 Master Submitted URL Directory & Live Tracker Tab */}
+        {activeTab === 'tracker' && (
+          <motion.div
+            key="tracker"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <UrlTrackerTab jobs={jobsHistory} onReIndexUrls={handleReIndexUrls} />
+          </motion.div>
+        )}
+
+        {/* Auto-Sitemap Monitor Tab */}
         {activeTab === 'monitors' && (
           <motion.div
             key="monitors"
@@ -527,7 +572,7 @@ export default function UserPanel({
           </motion.div>
         )}
 
-        {/* 🔌 Developer REST API Keys Tab */}
+        {/* Developer REST API Keys Tab */}
         {activeTab === 'apikeys' && (
           <motion.div
             key="apikeys"
@@ -549,7 +594,6 @@ export default function UserPanel({
               </div>
             </div>
 
-            {/* Secret Key Created Display Alert */}
             {createdSecretKey && (
               <div className="p-5 rounded-2xl bg-slate-950 border border-slate-700 space-y-3 animate-fade-in">
                 <div className="flex items-center space-x-2 text-slate-200 font-bold text-xs">
@@ -578,7 +622,6 @@ export default function UserPanel({
               </div>
             )}
 
-            {/* Create API Key Form */}
             <form onSubmit={handleCreateApiKey} className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-4">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono">Generate New API Key</h4>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -600,7 +643,6 @@ export default function UserPanel({
               </div>
             </form>
 
-            {/* Public REST API Usage Example Snippet */}
             <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono flex items-center space-x-1.5">
                 <Terminal className="w-3.5 h-3.5 text-slate-400" />
@@ -617,7 +659,6 @@ export default function UserPanel({
               </pre>
             </div>
 
-            {/* Active API Keys List */}
             <div className="space-y-4 pt-2">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 font-mono">Active API Keys ({apiKeys.length})</h4>
 
@@ -788,6 +829,14 @@ export default function UserPanel({
       <AdminPanelModal
         isOpen={isAdminOpen}
         onClose={() => setIsAdminOpen(false)}
+      />
+
+      <WhiteLabelReportModal
+        isOpen={isReportOpen}
+        onClose={() => setIsReportOpen(false)}
+        stats={stats}
+        jobs={jobsHistory}
+        userAccount={{ name: user.name, email: user.email }}
       />
     </div>
   );
