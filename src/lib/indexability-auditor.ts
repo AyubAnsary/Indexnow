@@ -66,6 +66,7 @@ export async function auditUrlIndexability(targetUrl: string): Promise<Indexabil
       },
       signal: controller.signal,
       cache: 'no-store',
+      redirect: 'manual',
     });
 
     clearTimeout(timeout);

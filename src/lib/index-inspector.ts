@@ -58,6 +58,7 @@ export async function inspectLiveUrlStatus(targetUrl: string): Promise<LiveInspe
       },
       signal: controller.signal,
       cache: 'no-store',
+      redirect: 'manual',
     });
 
     clearTimeout(timeout);
