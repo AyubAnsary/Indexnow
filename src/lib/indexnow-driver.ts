@@ -43,19 +43,24 @@ export function groupUrlsByHost(urls: string[]): Record<string, string[]> {
 export async function submitToIndexNow(
   host: string,
   urlList: string[],
-  options: IndexNowOptions = {}
+  options: IndexNowOptions & { appBaseUrl?: string } = {}
 ): Promise<DispatchedEngineResult[]> {
   const key = options.hostKey || generateIndexNowKey();
-  const keyLocation = options.keyLocation || `https://${host}/${key}.txt`;
+  
+  // Use our indexer engine's hosted key location so users don't have to upload key files to their own website!
+  const appBaseUrl = options.appBaseUrl || process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const keyLocation = options.keyLocation || `${appBaseUrl}/${key}.txt`;
+  
   const results: DispatchedEngineResult[] = [];
 
-  // IndexNow payload format
+  // IndexNow payload format with engine-managed keyLocation
   const payload = {
     host: host,
     key: key,
     keyLocation: keyLocation,
     urlList: urlList,
   };
+
 
   // We broadcast to primary IndexNow endpoint (api.indexnow.org) and Bing
   const targetEndpoints = options.customEndpoints || [

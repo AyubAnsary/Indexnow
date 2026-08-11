@@ -85,11 +85,13 @@ export async function POST(req: Request) {
       keyUsed: hostKey,
     };
 
+    const origin = new URL(req.url).origin;
+
     // Save job state initially
     saveJob(newJob);
 
     // Run processing asynchronously in background worker process
-    processJobAsync(jobId, engines, options, hostKey).catch((err) => {
+    processJobAsync(jobId, engines, { ...options, appBaseUrl: origin }, hostKey).catch((err) => {
       console.error(`Error processing job ${jobId}:`, err);
     });
 
@@ -111,7 +113,7 @@ export async function POST(req: Request) {
 async function processJobAsync(
   jobId: string,
   engines: EngineType[],
-  options: { performPreflight?: boolean },
+  options: { performPreflight?: boolean; appBaseUrl?: string },
   hostKey: string
 ) {
   const credentials = getUserCredentials();
@@ -160,7 +162,7 @@ async function processJobAsync(
     addJobLog(jobId, {
       level: 'info',
       engine: 'indexnow',
-      message: `Broadcasting URLs via IndexNow Protocol (Host Key: ${hostKey})...`,
+      message: `Broadcasting URLs via Engine-Managed Key Proxy (Host Key: ${hostKey})...`,
     });
 
     for (const [host, hostUrls] of Object.entries(urlsByHost)) {
@@ -170,7 +172,10 @@ async function processJobAsync(
         message: `Submitting batch of ${hostUrls.length} URL(s) for domain ${host}...`,
       });
 
-      const results = await submitToIndexNow(host, hostUrls, { hostKey });
+      const results = await submitToIndexNow(host, hostUrls, {
+        hostKey,
+        appBaseUrl: options.appBaseUrl,
+      });
 
       for (const res of results) {
         addJobLog(jobId, {
