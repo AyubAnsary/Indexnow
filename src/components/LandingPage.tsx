@@ -238,7 +238,7 @@ export default function LandingPage({
       </section>
 
       {/* 3. SilverStone vs Traditional Crawling Speed Matrix */}
-      <section className="max-w-6xl mx-auto px-4 space-y-8">
+      <section id="matrix" className="max-w-6xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-2">
           <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest">PERFORMANCE BENCHMARK</span>
           <h2 className="text-3xl font-extrabold text-white">Traditional Crawlers vs SilverStone Engine</h2>
@@ -286,7 +286,7 @@ export default function LandingPage({
       </section>
 
       {/* 4. Interactive Metallic Sandbox Preview Console */}
-      <section className="max-w-6xl mx-auto px-4 space-y-6">
+      <section id="indexer" className="max-w-6xl mx-auto px-4 space-y-6">
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-bold text-white flex items-center justify-center space-x-2">
             <Cpu className="w-5 h-5 text-slate-300" />
@@ -363,7 +363,7 @@ export default function LandingPage({
       </section>
 
       {/* 7. Subscription Pricing Matrix */}
-      <section className="max-w-7xl mx-auto px-4 space-y-12">
+      <section id="pricing" className="max-w-7xl mx-auto px-4 space-y-12">
         <div className="text-center space-y-3">
           <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest">TRANSPARENT PRICING</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Flexible Plans for Individuals & Agencies</h2>
@@ -417,7 +417,7 @@ export default function LandingPage({
       </section>
 
       {/* 8. Technical FAQ Accordion */}
-      <section className="max-w-4xl mx-auto px-4 space-y-8">
+      <section id="faq" className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
           <p className="text-xs text-slate-400">Everything you need to know about the SilverStone engine.</p>
