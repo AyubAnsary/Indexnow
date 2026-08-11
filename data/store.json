@@ -2,6 +2,7 @@
   "jobs": [
     {
       "id": "job_msof68iemely",
+      "userId": "usr_admin",
       "createdAt": "2026-08-11T08:49:48.951Z",
       "updatedAt": "2026-08-11T08:49:52.485Z",
       "totalUrls": 1,
@@ -35,22 +36,6 @@
               "statusCode": 202,
               "message": "HTTP 202: URL accepted. Key verification pending.",
               "timestamp": "2026-08-11T08:49:50.550Z"
-            },
-            {
-              "engine": "ping",
-              "endpoint": "Google Sitemap Ping",
-              "success": false,
-              "statusCode": 404,
-              "message": "Ping rejected by Google Sitemap Ping (HTTP 404)",
-              "timestamp": "2026-08-11T08:49:51.360Z"
-            },
-            {
-              "engine": "ping",
-              "endpoint": "Bing Sitemap Ping",
-              "success": false,
-              "statusCode": 410,
-              "message": "Ping rejected by Bing Sitemap Ping (HTTP 410)",
-              "timestamp": "2026-08-11T08:49:52.385Z"
             }
           ],
           "httpStatus": 200,
@@ -64,86 +49,25 @@
           "timestamp": "2026-08-11T08:49:48.951Z",
           "level": "info",
           "message": "Job initialized with 1 target URL(s)."
-        },
-        {
-          "id": "gu1w5js",
-          "timestamp": "2026-08-11T08:49:48.952Z",
-          "level": "info",
-          "message": "Starting execution for engines: INDEXNOW, PING"
-        },
-        {
-          "id": "j4p9yyn",
-          "timestamp": "2026-08-11T08:49:48.955Z",
-          "level": "info",
-          "message": "Running pre-flight HTTP verification checks on URLs..."
-        },
-        {
-          "id": "kv490ja",
-          "timestamp": "2026-08-11T08:49:49.219Z",
-          "level": "info",
-          "message": "Pre-flight https://nagorik.tech/ -> HTTP 200 (OK)"
-        },
-        {
-          "id": "5rgupbd",
-          "timestamp": "2026-08-11T08:49:49.220Z",
-          "level": "info",
-          "engine": "indexnow",
-          "message": "Broadcasting URLs via IndexNow Protocol (Host Key: a3fcbb6ea8f68824ba2fdd64dfc4a393)..."
-        },
-        {
-          "id": "7zpb1p0",
-          "timestamp": "2026-08-11T08:49:49.220Z",
-          "level": "info",
-          "engine": "indexnow",
-          "message": "Submitting batch of 1 URL(s) for domain nagorik.tech..."
-        },
-        {
-          "id": "z2yga60",
-          "timestamp": "2026-08-11T08:49:51.358Z",
-          "level": "success",
-          "engine": "indexnow",
-          "message": "[https://api.indexnow.org/indexnow] HTTP 202: URL accepted. Key verification pending."
-        },
-        {
-          "id": "h6in928",
-          "timestamp": "2026-08-11T08:49:51.359Z",
-          "level": "success",
-          "engine": "indexnow",
-          "message": "[https://www.bing.com/indexnow] HTTP 202: URL accepted. Key verification pending."
-        },
-        {
-          "id": "nr1o2v9",
-          "timestamp": "2026-08-11T08:49:51.360Z",
-          "level": "info",
-          "engine": "ping",
-          "message": "Notifying Google & Bing sitemap ping crawler endpoints..."
-        },
-        {
-          "id": "92qfb6n",
-          "timestamp": "2026-08-11T08:49:52.483Z",
-          "level": "error",
-          "engine": "ping",
-          "message": "[Google Sitemap Ping] Ping rejected by Google Sitemap Ping (HTTP 404)"
-        },
-        {
-          "id": "tszj28e",
-          "timestamp": "2026-08-11T08:49:52.484Z",
-          "level": "error",
-          "engine": "ping",
-          "message": "[Bing Sitemap Ping] Ping rejected by Bing Sitemap Ping (HTTP 410)"
-        },
-        {
-          "id": "k1qlly1",
-          "timestamp": "2026-08-11T08:49:52.485Z",
-          "level": "success",
-          "message": "Indexing Job Completed. Success: 1/1 URLs (100% pass rate)."
         }
       ],
       "keyUsed": "a3fcbb6ea8f68824ba2fdd64dfc4a393"
     }
   ],
-  "credentials": {
-    "googleServiceAccount": null,
-    "bingApiKey": null
-  }
+  "users": [
+    {
+      "id": "usr_admin",
+      "email": "admin@indexpulse.com",
+      "name": "System Admin",
+      "passwordHash": "57b1f32a76fdf2ee598126f5822f30b91d2db44d0361271f8450ed960ce0c563e46c76e279b9ae40d2106720faebfeab258ed6bf0bf0500be833a681a2936a28",
+      "passwordSalt": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+      "role": "admin",
+      "tier": "custom",
+      "planStatus": "active",
+      "monthlyQuota": 100000,
+      "urlsUsedThisMonth": 0,
+      "currentPeriodStart": "2026-08-11T09:00:00.000Z",
+      "createdAt": "2026-08-11T09:00:00.000Z"
+    }
+  ]
 }

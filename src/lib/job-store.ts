@@ -33,14 +33,17 @@ function initStore(): StoreData {
 
     if (fs.existsSync(STORE_FILE)) {
       const raw = fs.readFileSync(STORE_FILE, 'utf-8');
-      loadedData = JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      loadedData.jobs = Array.isArray(parsed.jobs) ? parsed.jobs : [];
+      loadedData.users = Array.isArray(parsed.users) ? parsed.users : [];
     }
   } catch (err) {
     console.error('Error initializing store:', err);
   }
 
   // Ensure default Admin Account exists
-  if (!loadedData.users || loadedData.users.length === 0) {
+  const hasAdmin = loadedData.users.some((u) => u.email.toLowerCase() === 'admin@indexpulse.com');
+  if (!hasAdmin) {
     const adminAuth = hashPassword('admin123');
     const defaultAdmin: UserAccount = {
       id: 'usr_admin',
@@ -56,7 +59,7 @@ function initStore(): StoreData {
       currentPeriodStart: new Date().toISOString(),
       createdAt: new Date().toISOString(),
     };
-    loadedData.users = [defaultAdmin];
+    loadedData.users.unshift(defaultAdmin);
     try {
       fs.writeFileSync(STORE_FILE, JSON.stringify(loadedData, null, 2), 'utf-8');
     } catch {}
@@ -83,11 +86,12 @@ export function getStoreData(): StoreData {
 
 // User Accounts Management
 export function getAllUsers(): UserAccount[] {
-  return getStoreData().users;
+  return getStoreData().users || [];
 }
 
 export function getUserById(id: string): UserAccount | undefined {
-  const user = getStoreData().users.find((u) => u.id === id);
+  const users = getStoreData().users || [];
+  const user = users.find((u) => u.id === id);
   if (user) {
     checkAndResetMonthlyQuota(user);
   }
@@ -95,7 +99,8 @@ export function getUserById(id: string): UserAccount | undefined {
 }
 
 export function getUserByEmail(email: string): UserAccount | undefined {
-  const user = getStoreData().users.find((u) => u.email.toLowerCase() === email.toLowerCase());
+  const users = getStoreData().users || [];
+  const user = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
   if (user) {
     checkAndResetMonthlyQuota(user);
   }
