@@ -12,8 +12,13 @@ import {
   SlidersHorizontal,
   Upload,
   Link as LinkIcon,
+  Sparkles,
+  Cpu,
+  ShieldCheck,
+  ShieldAlert,
 } from 'lucide-react';
 import { EngineType } from '@/lib/types';
+import { IndexabilityAuditResult } from '@/lib/indexability-auditor';
 
 interface UrlSubmitterProps {
   onSubmit: (data: {
@@ -40,6 +45,10 @@ export default function UrlSubmitter({
   const [performPreflight, setPerformPreflight] = useState<boolean>(true);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
+  // Caffeine Audit State
+  const [isAuditing, setIsAuditing] = useState(false);
+  const [auditResult, setAuditResult] = useState<IndexabilityAuditResult | null>(null);
+
   const toggleEngine = (engine: EngineType) => {
     if (engine === 'google_api' && !hasGoogleCreds) {
       onOpenCredentials();
@@ -57,12 +66,13 @@ export default function UrlSubmitter({
   const handleQuickPreset = (preset: 'sample' | 'sitemap') => {
     if (preset === 'sample') {
       setRawInput(
-        `https://example.com/blog/latest-news\nhttps://example.com/products/new-arrival\nhttps://example.com/about-us`
+        `https://nagorik.tech/`
       );
     } else if (preset === 'sitemap') {
-      setRawInput(`https://example.com/sitemap.xml`);
+      setRawInput(`https://nagorik.tech/sitemap.xml`);
     }
     setErrorMsg(null);
+    setAuditResult(null);
   };
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,9 +85,36 @@ export default function UrlSubmitter({
       if (content) {
         setRawInput(content);
         setErrorMsg(null);
+        setAuditResult(null);
       }
     };
     reader.readAsText(file);
+  };
+
+  // Run Live Caffeine Pre-Flight Audit
+  const handleRunAudit = async () => {
+    const firstUrl = rawInput.split(/[\r\n]+/).map((l) => l.trim()).find((l) => l.startsWith('http'));
+    if (!firstUrl) {
+      setErrorMsg('Please enter a valid HTTP/HTTPS URL to audit.');
+      return;
+    }
+
+    setIsAuditing(true);
+    setErrorMsg(null);
+    try {
+      const res = await fetch('/api/audit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url: firstUrl }),
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error || 'Audit failed');
+      setAuditResult(data.audit);
+    } catch (err: any) {
+      setErrorMsg(err.message || 'Caffeine audit error');
+    } finally {
+      setIsAuditing(false);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -125,15 +162,23 @@ export default function UrlSubmitter({
             </p>
           </div>
 
-          {/* Quick Presets */}
-          <div className="flex items-center space-x-2">
-            <span className="text-xs text-slate-400 font-medium hidden sm:inline">Presets:</span>
+          {/* Quick Presets & Caffeine Audit */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={handleRunAudit}
+              disabled={isAuditing || lineCount === 0}
+              className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200 border border-slate-600 transition flex items-center space-x-1"
+            >
+              <Cpu className="w-3.5 h-3.5 text-slate-300" />
+              <span>{isAuditing ? 'Auditing...' : '🔬 Caffeine Audit'}</span>
+            </button>
             <button
               type="button"
               onClick={() => handleQuickPreset('sample')}
               className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 border border-slate-700 transition"
             >
-              + Sample URLs
+              + Sample URL
             </button>
             <button
               type="button"
@@ -142,18 +187,51 @@ export default function UrlSubmitter({
             >
               + XML Sitemap
             </button>
-            <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 border border-slate-700 transition flex items-center space-x-1">
-              <Upload className="w-3.5 h-3.5 text-slate-300" />
-              <span>Import File</span>
-              <input
-                type="file"
-                accept=".txt,.csv,.xml"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </label>
           </div>
         </div>
+
+        {/* Live Caffeine Audit Inspector Card */}
+        {auditResult && (
+          <div className="mb-6 p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-3 font-mono text-xs animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                {auditResult.isIndexable ? (
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <ShieldAlert className="w-5 h-5 text-rose-400" />
+                )}
+                <span className="font-bold text-white text-sm">
+                  Caffeine Pre-Flight Audit Score: {auditResult.score}/100
+                </span>
+              </div>
+              <span className="px-2.5 py-0.5 rounded text-[10px] uppercase font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                HTTP {auditResult.statusCode} ({auditResult.ttfbMs}ms TTFB)
+              </span>
+            </div>
+
+            {auditResult.blockers.length > 0 && (
+              <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 space-y-1">
+                <span className="font-bold block">🚨 Indexation Blockers Detected:</span>
+                <ul className="list-disc pl-4 space-y-0.5 text-[11px]">
+                  {auditResult.blockers.map((b, i) => (
+                    <li key={i}>{b}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {auditResult.recommendations.length > 0 && (
+              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 space-y-1">
+                <span className="font-bold text-slate-200 block">💡 Optimization Recommendations:</span>
+                <ul className="list-disc pl-4 space-y-0.5 text-[11px] text-slate-400">
+                  {auditResult.recommendations.map((r, i) => (
+                    <li key={i}>{r}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Main Textarea Input */}
