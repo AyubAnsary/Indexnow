@@ -202,7 +202,7 @@ export default function LandingPage({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="pt-6 flex flex-wrap justify-center items-center gap-6 text-xs text-slate-400 font-mono"
+          className="pt-4 flex flex-wrap justify-center items-center gap-6 text-xs text-slate-400 font-mono"
         >
           <span className="flex items-center space-x-1.5">
             <CheckCircle2 className="w-4 h-4 text-slate-300" />
@@ -217,25 +217,26 @@ export default function LandingPage({
             <span>Anti-Group Buy Lock</span>
           </span>
         </motion.div>
-      </section>
 
-      {/* ⚡ 2. Zapier-Style Interactive Workflow Builder Widget */}
-      <section className="max-w-5xl mx-auto px-4">
-        <div className="rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 md:p-10 shadow-2xl space-y-6">
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
-              INTERACTIVE AUTOMATION BUILDER
+        {/* ⚡ Zapier-Style Interactive Workflow Builder Canvas (Above Fold) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 md:p-8 shadow-2xl space-y-6 text-left"
+        >
+          <div className="text-center space-y-1 max-w-xl mx-auto">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center justify-center space-x-1.5">
+              <Zap className="w-3.5 h-3.5 text-slate-300" />
+              <span>ZAPIER-STYLE INDEXING AUTOMATION CANVAS</span>
             </span>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Connect Any Publishing Source to Search Engines
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white">
+              Connect Any Publishing App to Search Crawlers
             </h3>
-            <p className="text-xs sm:text-sm text-slate-400">
-              Select your source trigger and search engine destination to simulate an automated indexing workflow.
-            </p>
           </div>
 
           {/* Interactive Automation Node Canvas */}
-          <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-6">
+          <div className="p-5 rounded-2xl bg-slate-950 border border-slate-800 space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
               
               {/* Trigger Node */}
@@ -247,7 +248,7 @@ export default function LandingPage({
                 <select
                   value={sourceApp}
                   onChange={(e) => setSourceApp(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white outline-none focus:border-slate-500"
+                  className="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white outline-none focus:border-slate-500"
                 >
                   <option value="WordPress Site">New Post Published in WordPress</option>
                   <option value="XML Sitemap Update">Sitemap XML Discovered (/sitemap.xml)</option>
@@ -259,8 +260,8 @@ export default function LandingPage({
               {/* Connecting Pulse Line */}
               <div className="md:col-span-1 flex items-center justify-center py-2">
                 <div className="relative flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300">
-                    <ArrowRight className="w-5 h-5" />
+                  <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300">
+                    <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
@@ -274,7 +275,7 @@ export default function LandingPage({
                 <select
                   value={targetEngine}
                   onChange={(e) => setTargetEngine(e.target.value)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white outline-none focus:border-slate-500"
+                  className="w-full px-3 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white outline-none focus:border-slate-500"
                 >
                   <option value="Google Search Console & IndexNow">Run Caffeine Audit ➔ Broadcast to Google & IndexNow</option>
                   <option value="Auto-Drip Scheduler">Purge Dead 404s ➔ Drip-Feed 50 URLs/Day</option>
@@ -285,14 +286,14 @@ export default function LandingPage({
             </div>
 
             {/* Test Simulation Trigger */}
-            <div className="pt-2 flex flex-col items-center space-y-3">
+            <div className="pt-1 flex flex-col items-center space-y-3">
               <button
                 onClick={handleSimulateZap}
                 disabled={isSimulatingZap}
                 className="px-6 py-3 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md hover:from-white hover:to-slate-300 transition flex items-center space-x-2"
               >
                 <RotateCw className={`w-4 h-4 text-slate-950 ${isSimulatingZap ? 'animate-spin' : ''}`} />
-                <span>{isSimulatingZap ? 'Simulating Automation Workflow...' : 'Test Automation Workflow'}</span>
+                <span>{isSimulatingZap ? 'Executing Automation...' : 'Test Automation Workflow'}</span>
               </button>
 
               {zapOutput && (
@@ -303,8 +304,7 @@ export default function LandingPage({
               )}
             </div>
           </div>
-
-        </div>
+        </motion.div>
       </section>
 
       {/* 3. Live Console Sandbox */}
