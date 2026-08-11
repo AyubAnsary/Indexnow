@@ -35,6 +35,9 @@ export interface UserAccount {
   currentPeriodStart: string;
   createdAt: string;
   googleServiceAccountEncrypted?: string; // Encrypted AES-256-GCM JSON string
+  activeSessionId?: string; // Anti-Group Buy: Single Active Device Lock
+  activeFingerprint?: string; // Anti-Group Buy: IP + User-Agent Fingerprint
+  lastIpAddress?: string;
 }
 
 export interface DispatchedEngineResult {

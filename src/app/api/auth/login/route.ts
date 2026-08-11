@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
-import { getUserByEmail } from '@/lib/job-store';
+import { getUserByEmail, saveUser } from '@/lib/job-store';
 import { verifyPassword, signJwtToken } from '@/lib/security';
 import { SESSION_COOKIE_NAME } from '@/lib/auth';
+import { generateDeviceFingerprint, getClientIp } from '@/lib/device-lock';
+import crypto from 'crypto';
 
 export async function POST(req: Request) {
   try {
@@ -21,11 +23,24 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, error: 'Invalid email or password.' }, { status: 401 });
     }
 
-    // Issue JWT session token
+    // Anti-Group Buy: Device Lock & Session Fingerprint Generation
+    const fingerprint = generateDeviceFingerprint(req);
+    const clientIp = getClientIp(req);
+    const sessionId = 'sess_' + crypto.randomBytes(16).toString('hex');
+
+    // Revoke any previous device session (Single Active Device Lock)
+    user.activeSessionId = sessionId;
+    user.activeFingerprint = fingerprint;
+    user.lastIpAddress = clientIp;
+    saveUser(user);
+
+    // Issue Device-Locked JWT session token
     const token = signJwtToken({
       userId: user.id,
       email: user.email,
       role: user.role,
+      sessionId,
+      fingerprint,
     });
 
     const response = NextResponse.json({

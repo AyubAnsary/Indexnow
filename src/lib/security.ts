@@ -116,9 +116,15 @@ export function decryptData(encryptedStr: string): string {
 }
 
 /**
- * Signs a lightweight JWT session token.
+ * Signs a lightweight JWT session token with Anti-Group Buy Device Lock.
  */
-export function signJwtToken(payload: { userId: string; email: string; role: string }): string {
+export function signJwtToken(payload: {
+  userId: string;
+  email: string;
+  role: string;
+  sessionId?: string;
+  fingerprint?: string;
+}): string {
   const header = Buffer.from(JSON.stringify({ alg: 'HS256', typ: 'JWT' })).toString('base64url');
   const exp = Math.floor(Date.now() / 1000) + 30 * 24 * 3600; // 30 days
   const body = Buffer.from(JSON.stringify({ ...payload, exp })).toString('base64url');
@@ -133,7 +139,13 @@ export function signJwtToken(payload: { userId: string; email: string; role: str
 /**
  * Verifies and decodes a JWT session token.
  */
-export function verifyJwtToken(token: string): { userId: string; email: string; role: string } | null {
+export function verifyJwtToken(token: string): {
+  userId: string;
+  email: string;
+  role: string;
+  sessionId?: string;
+  fingerprint?: string;
+} | null {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
@@ -154,6 +166,8 @@ export function verifyJwtToken(token: string): { userId: string; email: string; 
       userId: decoded.userId,
       email: decoded.email,
       role: decoded.role,
+      sessionId: decoded.sessionId,
+      fingerprint: decoded.fingerprint,
     };
   } catch {
     return null;
