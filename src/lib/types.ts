@@ -100,6 +100,30 @@ export interface GoogleServiceAccount {
   token_uri?: string;
 }
 
+export interface SitemapMonitor {
+  id: string;
+  userId: string;
+  sitemapUrl: string;
+  domain: string;
+  checkIntervalMinutes: number; // e.g. 60, 360, 1440
+  lastCheckedAt: string | null;
+  lastUrlCount: number;
+  discoveredUrlsCount: number;
+  status: 'active' | 'paused' | 'error';
+  lastError?: string | null;
+  createdAt: string;
+}
+
+export interface ApiKey {
+  id: string;
+  userId: string;
+  name: string;
+  keyPrefix: string; // e.g. sk_silverstone_a1b2
+  hashedKey: string; // Hashed secret key
+  createdAt: string;
+  lastUsedAt?: string | null;
+}
+
 export interface IndexingStats {
   totalJobs: number;
   totalUrlsSubmitted: number;

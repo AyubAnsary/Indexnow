@@ -1,6 +1,46 @@
 {
   "jobs": [
     {
+      "id": "job_msoihdxf6w3r",
+      "userId": "usr_admin",
+      "createdAt": "2026-08-11T10:22:28.036Z",
+      "updatedAt": "2026-08-11T10:22:28.036Z",
+      "totalUrls": 2,
+      "processedCount": 0,
+      "successCount": 0,
+      "failedCount": 0,
+      "status": "queued",
+      "enginesSelected": [
+        "indexnow",
+        "ping"
+      ],
+      "urls": [
+        {
+          "id": "job_msoihdxf6w3r_0",
+          "url": "https://nagorik.tech/new-post-1",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoihdxf6w3r_1",
+          "url": "https://nagorik.tech/new-post-2",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        }
+      ],
+      "logs": [
+        {
+          "id": "log_1",
+          "timestamp": "2026-08-11T10:22:28.036Z",
+          "level": "info",
+          "message": "Public Developer REST API job initialized for admin@indexpulse.com (2 URLs)."
+        }
+      ],
+      "keyUsed": "8863b2064f70588a39659f5c8665bf7d"
+    },
+    {
       "id": "job_msof68iemely",
       "userId": "usr_admin",
       "createdAt": "2026-08-11T08:49:48.951Z",
@@ -65,11 +105,36 @@
       "tier": "custom",
       "planStatus": "approval_pending",
       "monthlyQuota": 100000,
-      "urlsUsedThisMonth": 0,
+      "urlsUsedThisMonth": 2,
       "currentPeriodStart": "2026-08-11T09:00:00.000Z",
       "createdAt": "2026-08-11T09:00:00.000Z",
       "customPriceAmount": 35,
       "requestedTier": "free"
+    }
+  ],
+  "apiKeys": [
+    {
+      "id": "key_1786443741357_zcbi",
+      "userId": "usr_admin",
+      "name": "Production Zapier Key",
+      "keyPrefix": "sk_silverstone_d9b",
+      "hashedKey": "0806df68ef81f0cfcaf142ab614f097495430ad6e601905960a8a65e7ee1c300",
+      "createdAt": "2026-08-11T10:22:21.357Z",
+      "lastUsedAt": "2026-08-11T10:22:28.032Z"
+    }
+  ],
+  "monitors": [
+    {
+      "id": "mon_1786443754487_fm9c",
+      "userId": "usr_admin",
+      "sitemapUrl": "https://nagorik.tech/sitemap.xml",
+      "domain": "nagorik.tech",
+      "checkIntervalMinutes": 60,
+      "lastCheckedAt": null,
+      "lastUrlCount": 0,
+      "discoveredUrlsCount": 0,
+      "status": "active",
+      "createdAt": "2026-08-11T10:22:34.487Z"
     }
   ]
 }

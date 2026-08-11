@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import { IndexingJob, UserAccount, LogEntry, PLAN_TIERS, SubscriptionTier, GoogleServiceAccount } from './types';
+import { IndexingJob, UserAccount, LogEntry, PLAN_TIERS, SubscriptionTier, GoogleServiceAccount, SitemapMonitor, ApiKey } from './types';
 import { hashPassword, encryptData, decryptData } from './security';
+import crypto from 'crypto';
 
 const DATA_DIR = path.join(process.cwd(), 'data');
 const STORE_FILE = path.join(DATA_DIR, 'store.json');
@@ -9,6 +10,8 @@ const STORE_FILE = path.join(DATA_DIR, 'store.json');
 interface StoreData {
   jobs: IndexingJob[];
   users: UserAccount[];
+  monitors: SitemapMonitor[];
+  apiKeys: ApiKey[];
 }
 
 const globalForStore = globalThis as unknown as {
@@ -24,6 +27,8 @@ function initStore(): StoreData {
   let loadedData: StoreData = {
     jobs: [],
     users: [],
+    monitors: [],
+    apiKeys: [],
   };
 
   try {
@@ -36,6 +41,8 @@ function initStore(): StoreData {
       const parsed = JSON.parse(raw);
       loadedData.jobs = Array.isArray(parsed.jobs) ? parsed.jobs : [];
       loadedData.users = Array.isArray(parsed.users) ? parsed.users : [];
+      loadedData.monitors = Array.isArray(parsed.monitors) ? parsed.monitors : [];
+      loadedData.apiKeys = Array.isArray(parsed.apiKeys) ? parsed.apiKeys : [];
     }
   } catch (err) {
     console.error('Error initializing store:', err);
@@ -296,3 +303,130 @@ function notifySubscribers(job: IndexingJob) {
     }
   }
 }
+
+// ==========================================
+// Sitemap Auto-Monitor Functions
+// ==========================================
+export function getSitemapMonitors(userId: string): SitemapMonitor[] {
+  const store = initStore();
+  if (!Array.isArray(store.monitors)) store.monitors = [];
+  return store.monitors.filter((m) => m.userId === userId);
+}
+
+export function addSitemapMonitor(
+  userId: string,
+  sitemapUrl: string,
+  checkIntervalMinutes: number = 360
+): SitemapMonitor {
+  const store = initStore();
+  if (!Array.isArray(store.monitors)) store.monitors = [];
+  const domain = new URL(sitemapUrl).hostname;
+  const newMonitor: SitemapMonitor = {
+    id: `mon_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    userId,
+    sitemapUrl,
+    domain,
+    checkIntervalMinutes,
+    lastCheckedAt: null,
+    lastUrlCount: 0,
+    discoveredUrlsCount: 0,
+    status: 'active',
+    createdAt: new Date().toISOString(),
+  };
+
+  store.monitors.unshift(newMonitor);
+  saveStore();
+  return newMonitor;
+}
+
+export function deleteSitemapMonitor(userId: string, monitorId: string): boolean {
+  const store = initStore();
+  if (!Array.isArray(store.monitors)) store.monitors = [];
+  const idx = store.monitors.findIndex((m) => m.id === monitorId && m.userId === userId);
+  if (idx !== -1) {
+    store.monitors.splice(idx, 1);
+    saveStore();
+    return true;
+  }
+  return false;
+}
+
+export function updateSitemapMonitorStatus(
+  userId: string,
+  monitorId: string,
+  status: 'active' | 'paused'
+): SitemapMonitor | null {
+  const store = initStore();
+  if (!Array.isArray(store.monitors)) store.monitors = [];
+  const monitor = store.monitors.find((m) => m.id === monitorId && m.userId === userId);
+  if (monitor) {
+    monitor.status = status;
+    saveStore();
+    return monitor;
+  }
+  return null;
+}
+
+// ==========================================
+// Developer REST API Key Functions (sk_silverstone_...)
+// ==========================================
+export function getUserApiKeys(userId: string): Omit<ApiKey, 'hashedKey'>[] {
+  const store = initStore();
+  if (!Array.isArray(store.apiKeys)) store.apiKeys = [];
+  return store.apiKeys
+    .filter((k) => k.userId === userId)
+    .map(({ hashedKey, ...rest }) => rest);
+}
+
+export function createApiKey(userId: string, name: string): { apiKey: ApiKey; rawSecretKey: string } {
+  const store = initStore();
+  if (!Array.isArray(store.apiKeys)) store.apiKeys = [];
+  const secretRandom = crypto.randomBytes(24).toString('hex');
+  const rawSecretKey = `sk_silverstone_${secretRandom}`;
+  const keyPrefix = rawSecretKey.substring(0, 18); // e.g. sk_silverstone_a1b2
+  const hashedKey = crypto.createHash('sha256').update(rawSecretKey).digest('hex');
+
+  const apiKey: ApiKey = {
+    id: `key_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+    userId,
+    name: name || 'Developer API Key',
+    keyPrefix,
+    hashedKey,
+    createdAt: new Date().toISOString(),
+    lastUsedAt: null,
+  };
+
+  store.apiKeys.unshift(apiKey);
+  saveStore();
+  return { apiKey, rawSecretKey };
+}
+
+export function revokeApiKey(userId: string, keyId: string): boolean {
+  const store = initStore();
+  if (!Array.isArray(store.apiKeys)) store.apiKeys = [];
+  const idx = store.apiKeys.findIndex((k) => k.id === keyId && k.userId === userId);
+  if (idx !== -1) {
+    store.apiKeys.splice(idx, 1);
+    saveStore();
+    return true;
+  }
+  return false;
+}
+
+export function validateApiKey(rawKey: string): UserAccount | null {
+  if (!rawKey || !rawKey.startsWith('sk_silverstone_')) return null;
+
+  const store = initStore();
+  if (!Array.isArray(store.apiKeys)) store.apiKeys = [];
+  const hashedKey = crypto.createHash('sha256').update(rawKey.trim()).digest('hex');
+  const foundKey = store.apiKeys.find((k) => k.hashedKey === hashedKey);
+
+  if (!foundKey) return null;
+
+  // Update last used timestamp
+  foundKey.lastUsedAt = new Date().toISOString();
+  saveStore();
+
+  return getUserById(foundKey.userId) || null;
+}
+
