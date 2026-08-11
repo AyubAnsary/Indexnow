@@ -1,7 +1,16 @@
 {
-  "name": "indexnow-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@ayubansary/indexnow",
+  "version": "1.0.0",
+  "description": "Enterprise Search Engine URL Indexing SDK & API Client across Google, Bing, Yandex, and WebSub hubs.",
+  "author": "Ayub Ansary <https://ayubansary.com>",
+  "homepage": "https://ayubansary.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyubAnsary/Indexnow.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
