@@ -2,7 +2,7 @@ import crypto from 'crypto';
 
 // Secret key for AES-256-GCM encryption (fallback to internal secret if env not set)
 const ENCRYPTION_SECRET = process.env.ENCRYPTION_SECRET || 'indexpulse-super-secret-encryption-key-32b!';
-const JWT_SECRET = process.env.JWT_SECRET || 'indexpulse-jwt-secret-key-signature-2026';
+const JWT_SECRET = process.env.JWT_SECRET || 'indexpulse-jwt-secret-key-signature-evergreen';
 
 /**
  * SSRF (Server-Side Request Forgery) URL Protection.
