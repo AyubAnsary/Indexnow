@@ -40,6 +40,8 @@ import AdminPanelModal from './AdminPanelModal';
 import PricingModal from './PricingModal';
 import UrlTrackerTab from './UrlTrackerTab';
 import WhiteLabelReportModal from './WhiteLabelReportModal';
+import DomainAutoIndexerTab from './DomainAutoIndexerTab';
+import CohortAnalytics from './CohortAnalytics';
 import { IndexingJob, IndexingStats, SubscriptionTier, UserRole, SitemapMonitor, ApiKey } from '@/lib/types';
 
 interface UserPanelProps {
@@ -75,7 +77,7 @@ export default function UserPanel({
   onRefreshData,
   onRequestUpgrade,
 }: UserPanelProps) {
-  const [activeTab, setActiveTab] = useState<'submitter' | 'tracker' | 'monitors' | 'apikeys' | 'analytics' | 'credentials' | 'billing'>('submitter');
+  const [activeTab, setActiveTab] = useState<'submitter' | 'autopilot' | 'tracker' | 'monitors' | 'apikeys' | 'analytics' | 'credentials' | 'billing'>('submitter');
   const [isCredentialsOpen, setIsCredentialsOpen] = useState(false);
   const [isPricingOpen, setIsPricingOpen] = useState(false);
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -228,7 +230,7 @@ export default function UserPanel({
   };
 
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in font-sans">
       
       {/* Executive User Workspace Header Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-6 md:p-8 shadow-2xl shadow-slate-950/40">
@@ -330,6 +332,18 @@ export default function UserPanel({
           </button>
 
           <button
+            onClick={() => setActiveTab('autopilot')}
+            className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
+              activeTab === 'autopilot'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
+            }`}
+          >
+            <Globe className="w-4 h-4 text-slate-300" />
+            <span>Domain Auto-Pilot</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('tracker')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
               activeTab === 'tracker'
@@ -338,7 +352,7 @@ export default function UserPanel({
             }`}
           >
             <Search className="w-4 h-4 text-slate-300" />
-            <span>Live URL Index Tracker</span>
+            <span>Live URL Tracker</span>
           </button>
 
           <button
@@ -379,7 +393,7 @@ export default function UserPanel({
             }`}
           >
             <BarChart3 className="w-4 h-4 text-slate-300" />
-            <span>Analytics & Audit Trail</span>
+            <span>Analytics & Cohorts</span>
           </button>
 
           <button
@@ -440,7 +454,20 @@ export default function UserPanel({
           </motion.div>
         )}
 
-        {/* 🔍 Master Submitted URL Directory & Live Tracker Tab */}
+        {/* 🌐 Domain Auto-Pilot Tab */}
+        {activeTab === 'autopilot' && (
+          <motion.div
+            key="autopilot"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <DomainAutoIndexerTab onRefreshData={onRefreshData} />
+          </motion.div>
+        )}
+
+        {/* Master Submitted URL Directory & Live Tracker Tab */}
         {activeTab === 'tracker' && (
           <motion.div
             key="tracker"
@@ -692,6 +719,7 @@ export default function UserPanel({
           </motion.div>
         )}
 
+        {/* Analytics & Cohorts Tab */}
         {activeTab === 'analytics' && (
           <motion.div
             key="analytics"
@@ -699,7 +727,9 @@ export default function UserPanel({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
+            className="space-y-8"
           >
+            <CohortAnalytics jobs={jobsHistory} />
             <HistoryDashboard stats={stats} jobs={jobsHistory} />
           </motion.div>
         )}
