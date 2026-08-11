@@ -57,10 +57,10 @@ export default function LandingPage({
   activeJob,
 }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [emailInput, setEmailInput] = useState('');
+  const [activeFeatureTab, setActiveFeatureTab] = useState<'sitemap' | 'caffeine' | 'drip' | 'security'>('sitemap');
 
-  // Zapier Interactive Builder State
-  const [triggerApp, setTriggerApp] = useState('WordPress');
+  // Interactive Automation Canvas State
+  const [triggerApp, setTriggerApp] = useState('WordPress Site');
   const [actionApp, setActionApp] = useState('Google Indexing API');
   const [isSimulatingZap, setIsSimulatingZap] = useState(false);
   const [zapOutput, setZapOutput] = useState<string | null>(null);
@@ -70,177 +70,217 @@ export default function LandingPage({
     setZapOutput(null);
     setTimeout(() => {
       setIsSimulatingZap(false);
-      setZapOutput(`Zap Triggered! 100% verified broadcast from ${triggerApp} to ${actionApp} in 380ms.`);
+      setZapOutput(`Workflow Executed! 100% verified broadcast from ${triggerApp} to ${actionApp} in 360ms.`);
     }, 1000);
   };
 
-  const corporateLogos = [
-    { name: 'NVIDIA', font: 'font-black tracking-widest' },
-    { name: 'Google', font: 'font-bold' },
-    { name: 'Meta', font: 'font-black' },
-    { name: "Lowe's", font: 'font-extrabold uppercase' },
-    { name: 'Allstate', font: 'font-bold' },
-    { name: 'SAMSUNG', font: 'font-black tracking-widest' },
-    { name: 'mastercard', font: 'font-semibold italic' },
-    { name: 'hp', font: 'font-black italic' },
-    { name: 'experian.', font: 'font-bold' },
-    { name: 'CURSOR', font: 'font-mono font-bold' },
-    { name: 'okta', font: 'font-bold' },
+  const integrationEcosystem = [
+    { name: 'Google Search Console API', role: 'Direct OAuth 2.0 Push', status: 'Active' },
+    { name: 'IndexNow Protocol Mesh', role: 'Bing, Yandex & Seznam', status: 'Active' },
+    { name: 'WordPress & WooCommerce', role: 'Sitemap Auto-Sync', status: 'Compatible' },
+    { name: 'Shopify Store', role: 'Product URL Drip', status: 'Compatible' },
+    { name: 'Next.js & React Apps', role: 'Dynamic Route Indexer', status: 'Compatible' },
+    { name: 'Developer REST API', role: 'Bearer sk_silverstone_...', status: 'Active' },
+  ];
+
+  const automationRecipes = [
+    {
+      title: 'Publish in WordPress ➔ Broadcast to Google & IndexNow',
+      desc: 'Run Caffeine audit and push new blog posts the second you hit publish.',
+      trigger: 'WordPress',
+      action: 'Google API & IndexNow',
+      metric: '12.4k executions',
+    },
+    {
+      title: 'Product added in Shopify ➔ Drip-Feed to Bing & Yandex',
+      desc: 'Purge dead 404s and release 50 product URLs/day to protect crawl budget.',
+      trigger: 'Shopify',
+      action: 'Drip Scheduler',
+      metric: '48.2k executions',
+    },
+    {
+      title: 'XML Sitemap Updated ➔ Auto-Purge 404s & Index Now',
+      desc: 'Background daemon sweeps sitemap.xml every 5 mins and indexes clean pages.',
+      trigger: 'XML Sitemap',
+      action: 'Sitemap XML Purger',
+      metric: '89.1k executions',
+    },
+    {
+      title: 'REST API Key Trigger ➔ WebSub Atom RSS Broadcast',
+      desc: 'Developers call POST /api/v1/index to notify Google WebSub hubs in milliseconds.',
+      trigger: 'REST API (sk_...)',
+      action: 'WebSub RSS Hub',
+      metric: '154k executions',
+    },
   ];
 
   const faqs = [
     {
-      q: 'How does SilverStone compare to Zapier for search engine indexing?',
-      a: 'Zapier is a general automation tool, whereas SilverStone is an enterprise indexing platform built specifically for search crawlers. SilverStone connects your CMS or sitemap directly to Google Indexing API, IndexNow, and WebSub hubs with AI Caffeine pre-audits and zero code.',
+      q: 'How does SilverStone Indexer accelerate search engine indexation?',
+      a: 'SilverStone combines IndexNow protocol, Google Indexing API direct push, global RPC pings, and WebSub Atom/RSS feeds into a single unified broadcast pipeline, notifying search crawlers within 3 to 15 seconds.',
     },
     {
-      q: 'Do I need to upload any verification key files to my website server?',
-      a: 'No! SilverStone automatically hosts the IndexNow key proxy (/[key].txt) on our engine infrastructure. You simply paste your URLs or sitemap and our platform handles protocol verification transparently.',
+      q: 'Do website owners need to upload verification key files to their server?',
+      a: 'No! SilverStone hosts the IndexNow key location proxy (/[key].txt) on our engine infrastructure automatically. Simply paste your URLs or sitemap XML and our engine handles 100% of protocol verification.',
     },
     {
-      q: 'Is indexing automation completely safe for my website?',
-      a: 'Yes! SilverStone utilizes safe drip velocity scheduling (e.g., 50–250 URLs/day) to prevent search engine spam filter triggers and optimize crawl budget.',
+      q: 'What is the AI Caffeine Pre-Flight Auditor?',
+      a: 'The Caffeine Auditor simulates Googlebot’s renderer before spending user quota. It inspects HTTP status codes (200 OK), server TTFB latency, noindex meta tags, and rel="canonical" alignment.',
     },
     {
       q: 'Who built SilverStone Indexer?',
-      a: 'SilverStone Indexer was architected by Ayub Ansary (ayubansary.com), an Enterprise Technical SEO Consultant & Software Engineer specializing in search crawling infrastructure.',
+      a: 'SilverStone Indexer was architected by Ayub Ansary (ayubansary.com), an Enterprise Technical SEO Consultant & Software Engineer specializing in search engine crawling infrastructure.',
     },
   ];
 
   return (
-    <div className="bg-white text-slate-900 font-sans selection:bg-[#FF4F00] selection:text-white space-y-24 pb-20">
+    <div className="space-y-28 py-4 font-sans text-slate-100 selection:bg-slate-300 selection:text-slate-950 animate-fade-in">
       
-      {/* ⚡ 1. EXACT ZAPIER.COM HERO FOLD CLONE */}
-      <section className="max-w-7xl mx-auto px-4 pt-12 sm:pt-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      {/* 👑 1. SILVERSTONE HERO SECTION (SPLIT 2-COLUMN LUXURY SAAS LAYOUT) */}
+      <section className="relative max-w-7xl mx-auto px-4 pt-4">
+        {/* Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-slate-400/20 via-zinc-300/15 to-slate-100/20 rounded-full blur-[140px] pointer-events-none"></div>
+
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Headline, Subheadline, Dual Buttons, Trust Badges */}
-          <div className="lg:col-span-6 space-y-8 text-left">
+          {/* Left Column: Hero Title & Value Proposition */}
+          <div className="lg:col-span-6 space-y-6 text-left">
             
-            <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.12]">
-              The automation layer for search engine indexing
-            </h1>
-
-            <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-xl">
-              One unified pipeline. 9,000+ apps & search engines. Set your policies and work across any model, surface, or indexing harness — without connections or rules breaking.
-            </p>
-
-            {/* Dual Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
-              <button
-                onClick={onOpenAuth}
-                className="px-8 py-4 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-base shadow-xl shadow-[#FF4F00]/20 transition-all transform hover:scale-[1.01] flex items-center justify-center space-x-2"
-              >
-                <span>Start free with email</span>
-              </button>
-
-              <button
-                onClick={onOpenAuth}
-                className="px-6 py-4 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-800 font-bold text-base shadow-sm transition flex items-center justify-center space-x-3"
-              >
-                {/* Multi-Color Google G Logo SVG */}
-                <svg className="w-5 h-5" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-                </svg>
-                <span>Start free with Google</span>
-              </button>
-            </div>
-
-            {/* Trust Badges */}
-            <div className="flex items-center space-x-2 text-xs text-slate-500 font-medium pt-2">
-              <Shield className="w-4 h-4 text-slate-400" />
-              <span>SOC 2 (TYPE II) · GDPR · CCPA · AES-256 ENCRYPTED</span>
-            </div>
-
-          </div>
-
-          {/* Right Column: Exact 3D Connected Artwork */}
-          <div className="lg:col-span-6 flex justify-center">
-            <div className="relative">
-              <img
-                src="/images/zapier_hero.png"
-                alt="Zapier Style Automation Layer Artwork"
-                className="w-full max-w-lg mx-auto object-contain drop-shadow-xl hover:scale-[1.01] transition duration-500"
-              />
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* ⚡ 2. EXACT ZAPIER CORPORATE TRUST LOGO MARQUEE BAR */}
-      <section className="border-t border-slate-200 bg-slate-50/60 py-12">
-        <div className="max-w-7xl mx-auto px-4 text-center space-y-6">
-          <p className="text-xs font-semibold text-slate-400 tracking-wide uppercase">
-            Trusted by the world's best companies
-          </p>
-
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition duration-300">
-            {corporateLogos.map((logo, idx) => (
-              <span key={idx} className={`text-lg md:text-xl text-slate-700 ${logo.font}`}>
-                {logo.name}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-semibold shadow-xl backdrop-blur-xl"
+            >
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-200"></span>
               </span>
-            ))}
-          </div>
-        </div>
-      </section>
+              <span className="bg-gradient-to-r from-slate-100 via-zinc-200 to-slate-400 bg-clip-text text-transparent font-mono uppercase tracking-wider">
+                SEARCH ENGINE INDEXING AUTOMATION
+              </span>
+            </motion.div>
 
-      {/* ⚡ 3. ZAPIER INTERACTIVE WORKFLOW BUILDER CANVAS */}
-      <section className="max-w-6xl mx-auto px-4">
-        <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 shadow-2xl space-y-8">
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF4F00]">
-              ZAPIER WORKFLOW ENGINE
-            </span>
-            <h2 className="text-3xl font-extrabold text-white">
-              Connect Any Publishing Source to Search Engines
-            </h2>
-            <p className="text-sm text-slate-400">
-              Select your source trigger and search engine destination to execute an automated indexing workflow.
-            </p>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-[1.1]"
+            >
+              Automate your search <br />
+              <span className="bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                indexation without limits
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-base sm:text-lg text-slate-300 leading-relaxed"
+            >
+              Connect your CMS, XML sitemaps, or REST API directly to Google Indexing API, IndexNow, and WebSub hubs. Index new URLs in 3 to 15 seconds—zero code required.
+            </motion.p>
+
+            {/* CTA Action Group */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center gap-4 pt-2"
+            >
+              <button
+                onClick={onOpenAuth}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-black text-sm shadow-2xl shadow-slate-400/25 transition-all transform hover:scale-[1.02] flex items-center justify-center space-x-2"
+              >
+                <span>Start Free Automation</span>
+                <ArrowRight className="w-4 h-4 text-slate-950" />
+              </button>
+
+              <button
+                onClick={onOpenPricing}
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 font-bold text-sm border border-slate-700/80 transition flex items-center justify-center space-x-2"
+              >
+                <Sparkles className="w-4 h-4 text-slate-300" />
+                <span>Explore Plans ($5/mo)</span>
+              </button>
+            </motion.div>
+
+            {/* Value Badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="pt-4 flex flex-wrap gap-6 text-xs text-slate-400 font-mono"
+            >
+              <span className="flex items-center space-x-1.5">
+                <CheckCircle2 className="w-4 h-4 text-slate-300" />
+                <span>10 URLs/Mo Free Forever</span>
+              </span>
+              <span className="flex items-center space-x-1.5">
+                <CheckCircle2 className="w-4 h-4 text-slate-300" />
+                <span>Caffeine Pre-Flight Audit</span>
+              </span>
+              <span className="flex items-center space-x-1.5">
+                <CheckCircle2 className="w-4 h-4 text-slate-300" />
+                <span>Anti-Group Buy Lock</span>
+              </span>
+            </motion.div>
+
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-center">
-              
-              {/* Trigger Node */}
-              <div className="md:col-span-2 p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase font-bold flex items-center space-x-1">
-                  <Zap className="w-3.5 h-3.5 text-[#FF4F00]" />
-                  <span>1. WHEN THIS HAPPENS (TRIGGER)</span>
+          {/* Right Column: SilverStone Interactive Workflow Builder Canvas */}
+          <div className="lg:col-span-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 sm:p-8 shadow-2xl space-y-6 text-left"
+            >
+              <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+                <div className="flex items-center space-x-2">
+                  <Zap className="w-5 h-5 text-slate-300" />
+                  <span className="font-extrabold text-white text-sm font-mono">SilverStone Indexing Workflow Canvas</span>
+                </div>
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                  INTERACTIVE
                 </span>
+              </div>
+
+              {/* Node 1: Trigger */}
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="flex justify-between items-center text-[10px] font-mono font-bold text-slate-400">
+                  <span>1. TRIGGER</span>
+                  <span className="text-slate-300">WHEN THIS HAPPENS</span>
+                </div>
                 <select
                   value={triggerApp}
                   onChange={(e) => setTriggerApp(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-[#FF4F00]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-slate-500"
                 >
-                  <option value="WordPress">New Post Published in WordPress</option>
-                  <option value="Shopify">New Product Added to Shopify</option>
+                  <option value="WordPress Site">New Post Published in WordPress</option>
+                  <option value="Shopify Store">New Product Added to Shopify</option>
                   <option value="XML Sitemap">Sitemap XML Updated (/sitemap.xml)</option>
                   <option value="Developer REST API">Webhook Received via REST API Key</option>
                 </select>
               </div>
 
-              {/* Connector Arrow */}
-              <div className="md:col-span-1 flex items-center justify-center py-2">
-                <div className="w-10 h-10 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300">
-                  <ArrowRight className="w-4 h-4 text-[#FF4F00]" />
+              {/* Connecting Icon */}
+              <div className="flex justify-center">
+                <div className="w-8 h-8 rounded-full bg-slate-950 border border-slate-800 flex items-center justify-center text-slate-300">
+                  <ArrowRight className="w-4 h-4" />
                 </div>
               </div>
 
-              {/* Action Node */}
-              <div className="md:col-span-2 p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-                <span className="text-[10px] font-mono text-slate-400 uppercase font-bold flex items-center space-x-1">
-                  <Play className="w-3.5 h-3.5 text-[#FF4F00]" />
-                  <span>2. DO THIS AUTOMATICALLY (ACTION)</span>
-                </span>
+              {/* Node 2: Action */}
+              <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-2">
+                <div className="flex justify-between items-center text-[10px] font-mono font-bold text-slate-400">
+                  <span>2. ACTION</span>
+                  <span className="text-slate-300">DO THIS AUTOMATICALLY</span>
+                </div>
                 <select
                   value={actionApp}
                   onChange={(e) => setActionApp(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-lg bg-slate-950 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-[#FF4F00]"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-white font-mono outline-none focus:border-slate-500"
                 >
                   <option value="Google Indexing API">Run Caffeine Audit ➔ Broadcast to Google Indexing API</option>
                   <option value="IndexNow Protocol">Broadcast to IndexNow (Bing, Yandex, Seznam)</option>
@@ -249,37 +289,121 @@ export default function LandingPage({
                 </select>
               </div>
 
-            </div>
+              {/* Test Simulation Button */}
+              <div className="pt-2 space-y-3 text-center">
+                <button
+                  onClick={handleSimulateZap}
+                  disabled={isSimulatingZap}
+                  className="w-full py-3.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-lg hover:from-white hover:to-slate-300 transition flex items-center justify-center space-x-2"
+                >
+                  <RotateCw className={`w-4 h-4 text-slate-950 ${isSimulatingZap ? 'animate-spin' : ''}`} />
+                  <span>{isSimulatingZap ? 'Executing Workflow...' : `Publish & Run Workflow (${triggerApp} ➔ ${actionApp})`}</span>
+                </button>
 
-            {/* Test Simulation Action */}
-            <div className="pt-2 flex flex-col items-center space-y-3">
-              <button
-                onClick={handleSimulateZap}
-                disabled={isSimulatingZap}
-                className="px-8 py-3.5 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-xs shadow-lg transition flex items-center space-x-2"
-              >
-                <RotateCw className={`w-4 h-4 text-white ${isSimulatingZap ? 'animate-spin' : ''}`} />
-                <span>{isSimulatingZap ? 'Executing Zap Workflow...' : 'Test Automation Workflow'}</span>
-              </button>
+                {zapOutput && (
+                  <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800 text-xs font-mono text-slate-200 flex items-center space-x-2 animate-fade-in text-left">
+                    <CheckCircle2 className="w-4 h-4 text-slate-300 flex-shrink-0" />
+                    <span>{zapOutput}</span>
+                  </div>
+                )}
+              </div>
 
-              {zapOutput && (
-                <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-200 flex items-center space-x-2 animate-fade-in">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                  <span>{zapOutput}</span>
-                </div>
-              )}
-            </div>
+            </motion.div>
           </div>
+
         </div>
       </section>
 
-      {/* ⚡ 4. LIVE SUBMITTER SANDBOX */}
-      <section className="max-w-6xl mx-auto px-4 space-y-6">
+      {/* 👑 2. ECOSYSTEM PROTOCOLS GRID */}
+      <section className="max-w-7xl mx-auto px-4 space-y-8">
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+            MULTI-SIGNAL PROTOCOL MESH
+          </span>
+          <h2 className="text-3xl font-extrabold text-white">
+            Built for Modern Web Frameworks & Search Crawlers
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {integrationEcosystem.map((item, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 font-mono text-xs">
+              <div className="flex justify-between items-center">
+                <span className="font-bold text-white text-sm">{item.name}</span>
+                <span className="px-2 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300 border border-slate-700">
+                  {item.status}
+                </span>
+              </div>
+              <p className="text-slate-400 text-[11px]">{item.role}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 👑 3. PERFORMANCE & SPEED COMPARISON MATRIX */}
+      <section id="matrix" className="max-w-5xl mx-auto px-4 space-y-8">
+        <div className="text-center space-y-3 max-w-2xl mx-auto">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+            BENCHMARK COMPARISON
+          </span>
+          <h2 className="text-3xl font-extrabold text-white">
+            Why SilverStone Leads the Market
+          </h2>
+        </div>
+
+        <div className="overflow-x-auto rounded-3xl bg-slate-900/80 backdrop-blur-2xl border border-slate-800 p-6 md:p-8 shadow-2xl">
+          <table className="w-full text-left text-xs font-mono">
+            <thead className="bg-slate-950 text-slate-400 border-b border-slate-800 uppercase">
+              <tr>
+                <th className="p-4">Capability</th>
+                <th className="p-4 text-slate-500">Manual Indexing</th>
+                <th className="p-4 text-slate-500">Traditional Indexers</th>
+                <th className="p-4 text-white font-bold">SilverStone Indexer</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-800/80 text-slate-300">
+              <tr>
+                <td className="p-4 font-bold text-white">Crawl Response Time</td>
+                <td className="p-4 text-slate-500">14 to 30 Days</td>
+                <td className="p-4 text-slate-400">1 to 5 Days</td>
+                <td className="p-4 text-slate-200 font-bold">3 to 15 Seconds</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-bold text-white">Pre-Submission AI Audit</td>
+                <td className="p-4 text-slate-500">None</td>
+                <td className="p-4 text-slate-500">None (Fails on 404s)</td>
+                <td className="p-4 text-slate-200 font-bold">Caffeine Pre-Flight Auditor</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-bold text-white">Live Index Verification</td>
+                <td className="p-4 text-slate-500">Manual GSC Inspect</td>
+                <td className="p-4 text-slate-500">None</td>
+                <td className="p-4 text-slate-200 font-bold">Live Inspector & Master Directory</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-bold text-white">Zero-Touch Sitemap Automation</td>
+                <td className="p-4 text-slate-500">Manual Copy-Paste</td>
+                <td className="p-4 text-slate-500">Manual Copy-Paste</td>
+                <td className="p-4 text-slate-200 font-bold">Autonomous 24/7 Background Cron</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-bold text-white">Anti-Group Buy Protection</td>
+                <td className="p-4 text-slate-500">None</td>
+                <td className="p-4 text-slate-500">None</td>
+                <td className="p-4 text-slate-200 font-bold">Device Fingerprinting Lock</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* 👑 4. INTERACTIVE SANDBOX CONSOLE */}
+      <section id="indexer" className="max-w-6xl mx-auto px-4 space-y-6">
         <div className="text-center space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
             TRY THE LIVE INDEXING SANDBOX
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900">Paste a URL to test instant indexing</h2>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white">Paste a URL to test instant indexing</h2>
         </div>
 
         <UrlSubmitter
@@ -291,12 +415,12 @@ export default function LandingPage({
         <LiveMonitor job={activeJob} />
       </section>
 
-      {/* ⚡ 5. AUTHOR & ENTERPRISE TECHNICAL SEO CONSULTANT CARD */}
+      {/* 👑 5. AUTHOR & ENTERPRISE TECHNICAL SEO CONSULTANT CARD */}
       <section className="max-w-5xl mx-auto px-4">
-        <div className="p-8 rounded-3xl bg-slate-900 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 font-sans">
+        <div className="p-8 rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 font-sans">
           <div className="space-y-3 text-left">
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF4F00] flex items-center space-x-2">
-              <Award className="w-4 h-4" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2">
+              <Award className="w-4 h-4 text-slate-300" />
               <span>ARCHITECTED BY ENTERPRISE TECHNICAL SEO CONSULTANT</span>
             </span>
             <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
@@ -310,10 +434,10 @@ export default function LandingPage({
                 href="https://ayubansary.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center space-x-2 px-6 py-3 rounded-xl bg-[#FF4F00] hover:bg-[#e04500] text-white font-extrabold text-xs shadow-md transition"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md hover:from-white hover:to-slate-300 transition"
               >
                 <span>Visit AyubAnsary.com</span>
-                <ExternalLink className="w-3.5 h-3.5 text-white" />
+                <ExternalLink className="w-3.5 h-3.5 text-slate-950" />
               </a>
             </div>
           </div>
@@ -329,31 +453,31 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* ⚡ 6. FAQS */}
-      <section className="max-w-4xl mx-auto px-4 space-y-8">
+      {/* 👑 6. FAQS */}
+      <section id="faq" className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-3">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
+          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
             FREQUENTLY ASKED QUESTIONS
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900">Everything You Need to Know</h2>
+          <h2 className="text-3xl font-extrabold text-white">Everything You Need to Know</h2>
         </div>
 
         <div className="space-y-4 font-sans">
           {faqs.map((faq, idx) => (
-            <div key={idx} className="rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden">
+            <div key={idx} className="rounded-2xl bg-slate-900/80 border border-slate-800 overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-5 text-left font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-100 transition"
+                className="w-full p-5 text-left font-bold text-sm text-white flex justify-between items-center hover:bg-slate-800/50 transition"
               >
                 <span>{faq.q}</span>
                 {openFaq === idx ? (
-                  <ChevronUp className="w-4 h-4 text-slate-500" />
+                  <ChevronUp className="w-4 h-4 text-slate-400" />
                 ) : (
-                  <ChevronDown className="w-4 h-4 text-slate-500" />
+                  <ChevronDown className="w-4 h-4 text-slate-400" />
                 )}
               </button>
               {openFaq === idx && (
-                <div className="px-5 pb-5 text-xs text-slate-600 leading-relaxed font-mono border-t border-slate-200 pt-3">
+                <div className="px-5 pb-5 text-xs text-slate-400 leading-relaxed font-mono border-t border-slate-800/60 pt-3">
                   {faq.a}
                 </div>
               )}
