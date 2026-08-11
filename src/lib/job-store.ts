@@ -44,7 +44,7 @@ function initStore(): StoreData {
   // Ensure default Admin Account exists
   const hasAdmin = loadedData.users.some((u) => u.email.toLowerCase() === 'admin@indexpulse.com');
   if (!hasAdmin) {
-    const adminAuth = hashPassword('admin123');
+    const adminAuth = hashPassword('admin123', '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d');
     const defaultAdmin: UserAccount = {
       id: 'usr_admin',
       email: 'admin@indexpulse.com',
