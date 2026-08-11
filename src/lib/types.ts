@@ -61,6 +61,14 @@ export interface UrlSubmissionItem {
   errorMessage?: string;
 }
 
+export interface DripConfig {
+  isDrip: boolean;
+  dailyLimit: number;
+  startDate: string;
+  queuedUrls: string[];
+  processedBatchesCount: number;
+}
+
 export interface IndexingJob {
   id: string;
   userId: string; // Multi-tenant isolation
@@ -75,6 +83,7 @@ export interface IndexingJob {
   urls: UrlSubmissionItem[];
   logs: LogEntry[];
   keyUsed?: string;
+  dripConfig?: DripConfig;
 }
 
 export interface LogEntry {

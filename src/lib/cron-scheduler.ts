@@ -38,11 +38,16 @@ export function initCronScheduler() {
   }, 5 * 60 * 1000);
 }
 
+import { processDripFeedBatches } from './drip-feed-scheduler';
+
 /**
  * Sweeps all active sitemap monitors and processes due checks
  */
 export async function runAutonomousSitemapSync() {
   try {
+    // Process active drip-feed batch releases
+    await processDripFeedBatches().catch(() => {});
+
     const store = getStoreData();
     if (!Array.isArray(store.monitors) || store.monitors.length === 0) return;
 

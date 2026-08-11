@@ -1,6 +1,1388 @@
 {
   "jobs": [
     {
+      "id": "job_msot91k9gyjg",
+      "userId": "usr_admin",
+      "createdAt": "2026-08-11T15:23:54.542Z",
+      "updatedAt": "2026-08-11T15:23:54.542Z",
+      "totalUrls": 95,
+      "processedCount": 0,
+      "successCount": 0,
+      "failedCount": 0,
+      "status": "queued",
+      "enginesSelected": [
+        "indexnow",
+        "ping"
+      ],
+      "urls": [
+        {
+          "id": "job_msot91k9gyjg_0",
+          "url": "https://nagorik.tech/about",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_1",
+          "url": "https://nagorik.tech/blog",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_2",
+          "url": "https://nagorik.tech/careers",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_3",
+          "url": "https://nagorik.tech/case-studies",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_4",
+          "url": "https://nagorik.tech/contact",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_5",
+          "url": "https://nagorik.tech/",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_6",
+          "url": "https://nagorik.tech/partner-program",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_7",
+          "url": "https://nagorik.tech/privacy",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_8",
+          "url": "https://nagorik.tech/services/blockchain-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_9",
+          "url": "https://nagorik.tech/services/custom-software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_10",
+          "url": "https://nagorik.tech/services/html5-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_11",
+          "url": "https://nagorik.tech/services/mvp-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_12",
+          "url": "https://nagorik.tech/services",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_13",
+          "url": "https://nagorik.tech/services/staff-augmentation",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_14",
+          "url": "https://nagorik.tech/services/technology-partner",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_15",
+          "url": "https://nagorik.tech/services/vpn-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_16",
+          "url": "https://nagorik.tech/solutions/intelligent-automation",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_17",
+          "url": "https://nagorik.tech/solutions/lms",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_18",
+          "url": "https://nagorik.tech/solutions/loyalty-program",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_19",
+          "url": "https://nagorik.tech/solutions/white-label-vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_20",
+          "url": "https://nagorik.tech/terms",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_21",
+          "url": "https://nagorik.tech/thank-you",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_22",
+          "url": "https://nagorik.tech/case-studies/romoni",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_23",
+          "url": "https://nagorik.tech/blog/ai",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_24",
+          "url": "https://nagorik.tech/blog/fintech",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_25",
+          "url": "https://nagorik.tech/blog/blockchain",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_26",
+          "url": "https://nagorik.tech/blog/game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_27",
+          "url": "https://nagorik.tech/blog/app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_28",
+          "url": "https://nagorik.tech/blog/software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_29",
+          "url": "https://nagorik.tech/blog/ecommerce",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_30",
+          "url": "https://nagorik.tech/blog/ui-ux",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_31",
+          "url": "https://nagorik.tech/blog/vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_32",
+          "url": "https://nagorik.tech/blog/blockchain-for-food-supply-chain-explained",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_33",
+          "url": "https://nagorik.tech/blog/top-islamic-charity-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_34",
+          "url": "https://nagorik.tech/blog/mobile-app-development-cost-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_35",
+          "url": "https://nagorik.tech/blog/ai-nutrition-tracking-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_36",
+          "url": "https://nagorik.tech/blog/personal-finance-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_37",
+          "url": "https://nagorik.tech/blog/top-white-label-crypto-payment-solution-companies-in-dubai",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_38",
+          "url": "https://nagorik.tech/blog/top-on-demand-fuel-delivery-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_39",
+          "url": "https://nagorik.tech/blog/blockchain-for-electronic-medical-record",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_40",
+          "url": "https://nagorik.tech/blog/top-blockchain-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_41",
+          "url": "https://nagorik.tech/blog/top-custom-software-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_42",
+          "url": "https://nagorik.tech/blog/top-it-staff-augmentation-companies-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_43",
+          "url": "https://nagorik.tech/blog/how-does-vpn-protect",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_44",
+          "url": "https://nagorik.tech/blog/top-ai-agent-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_45",
+          "url": "https://nagorik.tech/blog/top-mobile-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_46",
+          "url": "https://nagorik.tech/blog/how-to-start-a-vpn-company",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_47",
+          "url": "https://nagorik.tech/blog/how-to-make-a-game",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_48",
+          "url": "https://nagorik.tech/blog/on-demand-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_49",
+          "url": "https://nagorik.tech/blog/how-to-make-money-with-vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_50",
+          "url": "https://nagorik.tech/blog/vpn-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_51",
+          "url": "https://nagorik.tech/blog/white-label-vpn-solution",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_52",
+          "url": "https://nagorik.tech/blog/unity-3d-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_53",
+          "url": "https://nagorik.tech/blog/trivia-quiz-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_54",
+          "url": "https://nagorik.tech/blog/vpn-business-model",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_55",
+          "url": "https://nagorik.tech/blog/poker-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_56",
+          "url": "https://nagorik.tech/blog/html5-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_57",
+          "url": "https://nagorik.tech/blog/ludo-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_58",
+          "url": "https://nagorik.tech/blog/ios-vpn-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_59",
+          "url": "https://nagorik.tech/blog/hypercasual-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_60",
+          "url": "https://nagorik.tech/blog/android-vpn-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_61",
+          "url": "https://nagorik.tech/blog/property-management-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_62",
+          "url": "https://nagorik.tech/blog/islamic-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_63",
+          "url": "https://nagorik.tech/blog/condo-management-software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_64",
+          "url": "https://nagorik.tech/blog/indie-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_65",
+          "url": "https://nagorik.tech/blog/webgl-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_66",
+          "url": "https://nagorik.tech/blog/match-3-puzzle-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_67",
+          "url": "https://nagorik.tech/blog/how-to-become-a-vpn-service-provider",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_68",
+          "url": "https://nagorik.tech/blog/vpn-app-development-cost",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_69",
+          "url": "https://nagorik.tech/blog/ai-agent-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_70",
+          "url": "https://nagorik.tech/blog/how-to-make-board-games",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_71",
+          "url": "https://nagorik.tech/blog/top-software-companies-in-bangladesh",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_72",
+          "url": "https://nagorik.tech/blog/agent-as-a-service",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_73",
+          "url": "https://nagorik.tech/blog/top-nopcommerce-development-companies",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_74",
+          "url": "https://nagorik.tech/blog/digital-wallet-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_75",
+          "url": "https://nagorik.tech/blog/smart-contract-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_76",
+          "url": "https://nagorik.tech/blog/security-token-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_77",
+          "url": "https://nagorik.tech/blog/defi-wallet-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_78",
+          "url": "https://nagorik.tech/blog/dapp-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_79",
+          "url": "https://nagorik.tech/blog/nft-marketplace-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_80",
+          "url": "https://nagorik.tech/blog/color-theory",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_81",
+          "url": "https://nagorik.tech/blog/crypto-payment-gateway-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_82",
+          "url": "https://nagorik.tech/blog/cryptocurrency-payment-gateway-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_83",
+          "url": "https://nagorik.tech/blog/crypto-node-hosting",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_84",
+          "url": "https://nagorik.tech/blog/asset-tokenization",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_85",
+          "url": "https://nagorik.tech/blog/enterprise-blockchain-integration",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_86",
+          "url": "https://nagorik.tech/blog/blockchain-ecosystem",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_87",
+          "url": "https://nagorik.tech/blog/web3-game-development-guide",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_88",
+          "url": "https://nagorik.tech/blog/solidity-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_89",
+          "url": "https://nagorik.tech/blog/stock-trading-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_90",
+          "url": "https://nagorik.tech/blog/saas-landing-page-best-practices",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_91",
+          "url": "https://nagorik.tech/blog/stablecoin-wallet-architecture",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_92",
+          "url": "https://nagorik.tech/blog/contract-testing-101",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_93",
+          "url": "https://nagorik.tech/blog/blockchain-in-pharmaceutical-supply-chain",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msot91k9gyjg_94",
+          "url": "https://nagorik.tech/blog/esim-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        }
+      ],
+      "logs": [
+        {
+          "id": "log_1",
+          "timestamp": "2026-08-11T15:23:54.543Z",
+          "level": "info",
+          "message": "[Autonomous Cron Daemon] Auto-indexed 95 URLs from https://nagorik.tech/sitemap.xml"
+        }
+      ],
+      "keyUsed": "8ff5e61c328f23e5be9bedab6c5d00a2"
+    },
+    {
+      "id": "job_msoqxg9wk8aw",
+      "userId": "usr_admin",
+      "createdAt": "2026-08-11T14:18:54.501Z",
+      "updatedAt": "2026-08-11T14:18:54.501Z",
+      "totalUrls": 95,
+      "processedCount": 0,
+      "successCount": 0,
+      "failedCount": 0,
+      "status": "queued",
+      "enginesSelected": [
+        "indexnow",
+        "ping"
+      ],
+      "urls": [
+        {
+          "id": "job_msoqxg9wk8aw_0",
+          "url": "https://nagorik.tech/about",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_1",
+          "url": "https://nagorik.tech/blog",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_2",
+          "url": "https://nagorik.tech/careers",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_3",
+          "url": "https://nagorik.tech/case-studies",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_4",
+          "url": "https://nagorik.tech/contact",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_5",
+          "url": "https://nagorik.tech/",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_6",
+          "url": "https://nagorik.tech/partner-program",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_7",
+          "url": "https://nagorik.tech/privacy",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_8",
+          "url": "https://nagorik.tech/services/blockchain-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_9",
+          "url": "https://nagorik.tech/services/custom-software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_10",
+          "url": "https://nagorik.tech/services/html5-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_11",
+          "url": "https://nagorik.tech/services/mvp-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_12",
+          "url": "https://nagorik.tech/services",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_13",
+          "url": "https://nagorik.tech/services/staff-augmentation",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_14",
+          "url": "https://nagorik.tech/services/technology-partner",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_15",
+          "url": "https://nagorik.tech/services/vpn-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_16",
+          "url": "https://nagorik.tech/solutions/intelligent-automation",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_17",
+          "url": "https://nagorik.tech/solutions/lms",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_18",
+          "url": "https://nagorik.tech/solutions/loyalty-program",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_19",
+          "url": "https://nagorik.tech/solutions/white-label-vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_20",
+          "url": "https://nagorik.tech/terms",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_21",
+          "url": "https://nagorik.tech/thank-you",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_22",
+          "url": "https://nagorik.tech/case-studies/romoni",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_23",
+          "url": "https://nagorik.tech/blog/ai",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_24",
+          "url": "https://nagorik.tech/blog/fintech",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_25",
+          "url": "https://nagorik.tech/blog/blockchain",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_26",
+          "url": "https://nagorik.tech/blog/game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_27",
+          "url": "https://nagorik.tech/blog/app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_28",
+          "url": "https://nagorik.tech/blog/software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_29",
+          "url": "https://nagorik.tech/blog/ecommerce",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_30",
+          "url": "https://nagorik.tech/blog/ui-ux",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_31",
+          "url": "https://nagorik.tech/blog/vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_32",
+          "url": "https://nagorik.tech/blog/blockchain-for-food-supply-chain-explained",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_33",
+          "url": "https://nagorik.tech/blog/top-islamic-charity-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_34",
+          "url": "https://nagorik.tech/blog/mobile-app-development-cost-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_35",
+          "url": "https://nagorik.tech/blog/ai-nutrition-tracking-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_36",
+          "url": "https://nagorik.tech/blog/personal-finance-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_37",
+          "url": "https://nagorik.tech/blog/top-white-label-crypto-payment-solution-companies-in-dubai",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_38",
+          "url": "https://nagorik.tech/blog/top-on-demand-fuel-delivery-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_39",
+          "url": "https://nagorik.tech/blog/blockchain-for-electronic-medical-record",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_40",
+          "url": "https://nagorik.tech/blog/top-blockchain-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_41",
+          "url": "https://nagorik.tech/blog/top-custom-software-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_42",
+          "url": "https://nagorik.tech/blog/top-it-staff-augmentation-companies-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_43",
+          "url": "https://nagorik.tech/blog/how-does-vpn-protect",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_44",
+          "url": "https://nagorik.tech/blog/top-ai-agent-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_45",
+          "url": "https://nagorik.tech/blog/top-mobile-app-development-companies-in-uae",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_46",
+          "url": "https://nagorik.tech/blog/how-to-start-a-vpn-company",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_47",
+          "url": "https://nagorik.tech/blog/how-to-make-a-game",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_48",
+          "url": "https://nagorik.tech/blog/on-demand-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_49",
+          "url": "https://nagorik.tech/blog/how-to-make-money-with-vpn",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_50",
+          "url": "https://nagorik.tech/blog/vpn-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_51",
+          "url": "https://nagorik.tech/blog/white-label-vpn-solution",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_52",
+          "url": "https://nagorik.tech/blog/unity-3d-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_53",
+          "url": "https://nagorik.tech/blog/trivia-quiz-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_54",
+          "url": "https://nagorik.tech/blog/vpn-business-model",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_55",
+          "url": "https://nagorik.tech/blog/poker-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_56",
+          "url": "https://nagorik.tech/blog/html5-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_57",
+          "url": "https://nagorik.tech/blog/ludo-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_58",
+          "url": "https://nagorik.tech/blog/ios-vpn-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_59",
+          "url": "https://nagorik.tech/blog/hypercasual-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_60",
+          "url": "https://nagorik.tech/blog/android-vpn-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_61",
+          "url": "https://nagorik.tech/blog/property-management-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_62",
+          "url": "https://nagorik.tech/blog/islamic-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_63",
+          "url": "https://nagorik.tech/blog/condo-management-software-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_64",
+          "url": "https://nagorik.tech/blog/indie-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_65",
+          "url": "https://nagorik.tech/blog/webgl-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_66",
+          "url": "https://nagorik.tech/blog/match-3-puzzle-game-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_67",
+          "url": "https://nagorik.tech/blog/how-to-become-a-vpn-service-provider",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_68",
+          "url": "https://nagorik.tech/blog/vpn-app-development-cost",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_69",
+          "url": "https://nagorik.tech/blog/ai-agent-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_70",
+          "url": "https://nagorik.tech/blog/how-to-make-board-games",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_71",
+          "url": "https://nagorik.tech/blog/top-software-companies-in-bangladesh",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_72",
+          "url": "https://nagorik.tech/blog/agent-as-a-service",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_73",
+          "url": "https://nagorik.tech/blog/top-nopcommerce-development-companies",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_74",
+          "url": "https://nagorik.tech/blog/digital-wallet-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_75",
+          "url": "https://nagorik.tech/blog/smart-contract-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_76",
+          "url": "https://nagorik.tech/blog/security-token-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_77",
+          "url": "https://nagorik.tech/blog/defi-wallet-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_78",
+          "url": "https://nagorik.tech/blog/dapp-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_79",
+          "url": "https://nagorik.tech/blog/nft-marketplace-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_80",
+          "url": "https://nagorik.tech/blog/color-theory",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_81",
+          "url": "https://nagorik.tech/blog/crypto-payment-gateway-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_82",
+          "url": "https://nagorik.tech/blog/cryptocurrency-payment-gateway-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_83",
+          "url": "https://nagorik.tech/blog/crypto-node-hosting",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_84",
+          "url": "https://nagorik.tech/blog/asset-tokenization",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_85",
+          "url": "https://nagorik.tech/blog/enterprise-blockchain-integration",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_86",
+          "url": "https://nagorik.tech/blog/blockchain-ecosystem",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_87",
+          "url": "https://nagorik.tech/blog/web3-game-development-guide",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_88",
+          "url": "https://nagorik.tech/blog/solidity-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_89",
+          "url": "https://nagorik.tech/blog/stock-trading-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_90",
+          "url": "https://nagorik.tech/blog/saas-landing-page-best-practices",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_91",
+          "url": "https://nagorik.tech/blog/stablecoin-wallet-architecture",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_92",
+          "url": "https://nagorik.tech/blog/contract-testing-101",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_93",
+          "url": "https://nagorik.tech/blog/blockchain-in-pharmaceutical-supply-chain",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        },
+        {
+          "id": "job_msoqxg9wk8aw_94",
+          "url": "https://nagorik.tech/blog/esim-app-development",
+          "domain": "nagorik.tech",
+          "status": "pending",
+          "engineResults": []
+        }
+      ],
+      "logs": [
+        {
+          "id": "log_1",
+          "timestamp": "2026-08-11T14:18:54.501Z",
+          "level": "info",
+          "message": "[Autonomous Cron Daemon] Auto-indexed 95 URLs from https://nagorik.tech/sitemap.xml"
+        }
+      ],
+      "keyUsed": "17d43502761991ca0fd1693f3cfe52bd"
+    },
+    {
       "id": "job_mson8ykkkfyk",
       "userId": "usr_admin",
       "createdAt": "2026-08-11T12:35:52.965Z",
@@ -796,7 +2178,7 @@
       "tier": "custom",
       "planStatus": "approval_pending",
       "monthlyQuota": 100000,
-      "urlsUsedThisMonth": 97,
+      "urlsUsedThisMonth": 287,
       "currentPeriodStart": "2026-08-11T09:00:00.000Z",
       "createdAt": "2026-08-11T09:00:00.000Z",
       "customPriceAmount": 35,
@@ -824,9 +2206,9 @@
       "sitemapUrl": "https://nagorik.tech/sitemap.xml",
       "domain": "nagorik.tech",
       "checkIntervalMinutes": 60,
-      "lastCheckedAt": "2026-08-11T12:35:52.964Z",
+      "lastCheckedAt": "2026-08-11T15:23:54.519Z",
       "lastUrlCount": 95,
-      "discoveredUrlsCount": 0,
+      "discoveredUrlsCount": 190,
       "status": "active",
       "createdAt": "2026-08-11T10:22:34.487Z"
     }
