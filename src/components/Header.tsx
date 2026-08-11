@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Zap, Key, User, LogOut, Shield, Sparkles, Layers, ArrowUpRight } from 'lucide-react';
+import { Shield, Key, User, LogOut, Sparkles, Layers, ArrowUpRight, Cpu } from 'lucide-react';
 import { SubscriptionTier, UserRole } from '@/lib/types';
 
 interface HeaderProps {
@@ -32,29 +32,29 @@ export default function Header({
   activeJobsCount,
 }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/60 shadow-lg shadow-indigo-950/10">
+    <header className="sticky top-0 z-40 backdrop-blur-2xl bg-slate-950/85 border-b border-slate-800 shadow-xl shadow-slate-950/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         
-        {/* Brand Logo & Title */}
+        {/* Metallic SilverStone Brand Logo & Title */}
         <div className="flex items-center space-x-3">
-          <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-400 p-[1px] shadow-lg shadow-cyan-500/20">
+          <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-tr from-slate-400 via-slate-100 to-zinc-500 p-[1px] shadow-lg shadow-slate-400/20">
             <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
-              <Zap className="w-6 h-6 text-cyan-400 animate-pulse" />
+              <Cpu className="w-6 h-6 text-slate-200" />
             </div>
           </div>
           <div>
             <div className="flex items-center space-x-2">
-              <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent">
-                IndexPulse
+              <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                SilverStone
               </h1>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                ENTERPRISE ENGINE
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-slate-800 text-slate-300 border border-slate-700">
+                METALLIC ENGINE
               </span>
             </div>
-            <p className="text-xs text-slate-400 flex items-center space-x-1">
-              <span>Universal Search Engine Indexer</span>
+            <p className="text-xs text-slate-400 flex items-center space-x-1 font-mono">
+              <span>Universal Search Indexer</span>
               <span className="text-slate-600">•</span>
-              <span className="text-cyan-400 font-medium">IndexNow Active</span>
+              <span className="text-slate-300 font-medium">IndexNow Active</span>
             </p>
           </div>
         </div>
@@ -80,10 +80,10 @@ export default function Header({
                 className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs transition"
               >
                 <span className="text-slate-400">Quota:</span>
-                <span className="font-mono text-emerald-400 font-bold">
+                <span className="font-mono text-slate-200 font-bold">
                   {currentUser.remainingQuota} / {currentUser.monthlyQuota.toLocaleString()}
                 </span>
-                <span className="uppercase text-[10px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <span className="uppercase text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                   {currentUser.tier}
                 </span>
               </button>
@@ -94,10 +94,10 @@ export default function Header({
                 className={`flex items-center space-x-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold transition border ${
                   currentUser.hasGoogleCreds
                     ? 'bg-slate-900 border-slate-800 text-slate-200 hover:bg-slate-800'
-                    : 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300 hover:bg-indigo-600/30'
+                    : 'bg-slate-800/80 border-slate-700 text-slate-300 hover:bg-slate-800'
                 }`}
               >
-                <Key className="w-3.5 h-3.5 text-cyan-400" />
+                <Key className="w-3.5 h-3.5 text-slate-300" />
                 <span className="hidden sm:inline">
                   {currentUser.hasGoogleCreds ? 'Google Key OK' : 'Connect Google API'}
                 </span>
@@ -106,15 +106,15 @@ export default function Header({
               {/* Upgrade Plan Button */}
               <button
                 onClick={onOpenPricing}
-                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-md transition"
+                className="flex items-center space-x-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md shadow-slate-400/20 hover:from-white hover:to-slate-300 transition"
               >
                 <span>Plans</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-slate-950" />
               </button>
 
               {/* User Profile Avatar & Logout */}
               <div className="flex items-center space-x-2 pl-2 border-l border-slate-800">
-                <div className="w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-xs font-bold text-white uppercase">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 border border-slate-600 flex items-center justify-center text-xs font-bold text-slate-200 uppercase shadow-inner">
                   {currentUser.name.substring(0, 2)}
                 </div>
                 <button
@@ -129,9 +129,9 @@ export default function Header({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-bold text-xs shadow-lg shadow-cyan-500/20 transition"
+              className="flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-extrabold text-xs shadow-lg shadow-slate-400/20 transition"
             >
-              <User className="w-4 h-4" />
+              <User className="w-4 h-4 text-slate-950" />
               <span>Sign In / Register</span>
             </button>
           )}

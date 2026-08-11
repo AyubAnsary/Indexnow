@@ -77,30 +77,30 @@ export default function UserPanel({
     <div className="space-y-8 animate-fade-in">
       
       {/* Executive User Workspace Header Banner */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800/90 p-6 md:p-8 shadow-2xl shadow-indigo-950/20">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-6 md:p-8 shadow-2xl shadow-slate-950/40">
         {/* Glow backdrop accent */}
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-cyan-500/20 via-indigo-500/10 to-emerald-500/0 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-slate-400/15 via-zinc-400/10 to-slate-200/0 rounded-full blur-3xl pointer-events-none"></div>
 
         <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           
           {/* User Profile Info */}
           <div className="flex items-center space-x-4">
             <div className="relative">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-emerald-400 p-[2px] shadow-lg shadow-cyan-500/30">
-                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-xl font-black text-cyan-400">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-slate-400 via-slate-100 to-zinc-500 p-[2px] shadow-lg shadow-slate-400/20">
+                <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-xl font-black text-slate-200">
                   {user.name.substring(0, 2).toUpperCase()}
                 </div>
               </div>
               <span className="absolute -bottom-1 -right-1 flex h-4 w-4">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-slate-950"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-slate-200 border-2 border-slate-950"></span>
               </span>
             </div>
 
             <div>
               <div className="flex items-center space-x-2">
                 <h2 className="text-2xl font-bold text-white tracking-tight">{user.name}</h2>
-                <span className="px-3 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/30">
+                <span className="px-3 py-0.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-slate-800 text-slate-300 border border-slate-700">
                   {user.tier} Plan
                 </span>
                 {user.role === 'admin' && (
@@ -112,17 +112,17 @@ export default function UserPanel({
               <p className="text-xs text-slate-400 mt-1 font-mono flex items-center space-x-2">
                 <span>{user.email}</span>
                 <span className="text-slate-600">•</span>
-                <span className="text-emerald-400 font-semibold">Workspace Active</span>
+                <span className="text-slate-300 font-semibold">Workspace Active</span>
               </p>
             </div>
           </div>
 
           {/* Quota Progress Gauge Card */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-slate-950/80 rounded-2xl p-4 border border-slate-800/80 shadow-inner">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-slate-950/80 rounded-2xl p-4 border border-slate-800 shadow-inner">
             <div className="space-y-1 min-w-[180px]">
               <div className="flex justify-between items-center text-xs font-mono">
                 <span className="text-slate-400">Monthly Quota</span>
-                <span className="text-emerald-400 font-bold">{quotaPercent}% Used</span>
+                <span className="text-slate-200 font-bold">{quotaPercent}% Used</span>
               </div>
 
               {/* Progress Bar */}
@@ -131,7 +131,7 @@ export default function UserPanel({
                   className={`h-full transition-all duration-500 rounded-full ${
                     quotaPercent > 90
                       ? 'bg-rose-500'
-                      : 'bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-400'
+                      : 'bg-gradient-to-r from-slate-300 via-slate-100 to-zinc-400'
                   }`}
                   style={{ width: `${Math.max(quotaPercent, 4)}%` }}
                 ></div>
@@ -139,15 +139,15 @@ export default function UserPanel({
 
               <div className="text-[11px] font-mono text-slate-400 flex justify-between">
                 <span>Used: {user.urlsUsedThisMonth}</span>
-                <span className="text-cyan-300 font-bold">Remaining: {user.remainingQuota}</span>
+                <span className="text-slate-200 font-bold">Remaining: {user.remainingQuota}</span>
               </div>
             </div>
 
             <button
               onClick={() => setIsPricingOpen(true)}
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-white font-bold text-xs shadow-md shadow-cyan-500/20 transition flex items-center justify-center space-x-1.5"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-extrabold text-xs shadow-md shadow-slate-400/20 transition flex items-center justify-center space-x-1.5"
             >
-              <Sparkles className="w-3.5 h-3.5" />
+              <Sparkles className="w-3.5 h-3.5 text-slate-950" />
               <span>Upgrade Quota</span>
             </button>
           </div>
@@ -160,11 +160,11 @@ export default function UserPanel({
             onClick={() => setActiveTab('submitter')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
               activeTab === 'submitter'
-                ? 'bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
             }`}
           >
-            <Zap className="w-4 h-4 text-cyan-400" />
+            <Zap className="w-4 h-4 text-slate-300" />
             <span>Instant Submitter</span>
           </button>
 
@@ -172,11 +172,11 @@ export default function UserPanel({
             onClick={() => setActiveTab('analytics')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
               activeTab === 'analytics'
-                ? 'bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
             }`}
           >
-            <BarChart3 className="w-4 h-4 text-indigo-400" />
+            <BarChart3 className="w-4 h-4 text-slate-300" />
             <span>Analytics & Audit Trail</span>
           </button>
 
@@ -184,14 +184,14 @@ export default function UserPanel({
             onClick={() => setActiveTab('credentials')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
               activeTab === 'credentials'
-                ? 'bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
             }`}
           >
-            <Key className="w-4 h-4 text-emerald-400" />
+            <Key className="w-4 h-4 text-slate-300" />
             <span>API Key Vault</span>
             {user.hasGoogleCreds && (
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="w-2 h-2 rounded-full bg-slate-300 animate-pulse"></span>
             )}
           </button>
 
@@ -199,11 +199,11 @@ export default function UserPanel({
             onClick={() => setActiveTab('billing')}
             className={`flex items-center space-x-2 px-4 py-2.5 rounded-xl font-bold text-xs transition duration-200 ${
               activeTab === 'billing'
-                ? 'bg-gradient-to-r from-cyan-500/20 to-indigo-500/20 text-cyan-300 border border-cyan-500/40 shadow-lg shadow-cyan-500/10'
+                ? 'bg-slate-800 text-slate-100 border border-slate-700 shadow-lg'
                 : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60 border border-transparent'
             }`}
           >
-            <CreditCard className="w-4 h-4 text-purple-400" />
+            <CreditCard className="w-4 h-4 text-slate-300" />
             <span>Plans & Billing</span>
           </button>
 

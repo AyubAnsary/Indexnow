@@ -106,8 +106,8 @@ export default function UrlSubmitter({
 
   return (
     <div className="relative group">
-      {/* Background Neon Glow Effects */}
-      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-emerald-500 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
+      {/* Background Metallic Chrome Glow Effects */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-slate-500 via-zinc-400 to-slate-300 rounded-3xl blur-xl opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200"></div>
 
       <div className="relative rounded-2xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 p-6 md:p-8 shadow-2xl shadow-slate-950">
         
@@ -116,7 +116,7 @@ export default function UrlSubmitter({
           <div>
             <h2 className="text-2xl font-bold text-white flex items-center gap-2">
               <span>Submit URLs for Instant Indexing</span>
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-800 text-slate-300 border border-slate-700">
                 100% FREE
               </span>
             </h2>
@@ -143,7 +143,7 @@ export default function UrlSubmitter({
               + XML Sitemap
             </button>
             <label className="cursor-pointer px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-300 border border-slate-700 transition flex items-center space-x-1">
-              <Upload className="w-3.5 h-3.5 text-cyan-400" />
+              <Upload className="w-3.5 h-3.5 text-slate-300" />
               <span>Import File</span>
               <input
                 type="file"
@@ -166,12 +166,12 @@ export default function UrlSubmitter({
               }}
               placeholder={`Paste your URLs here (one per line, comma-separated, or paste a sitemap link)...\n\nExample:\nhttps://yourdomain.com/blog/new-post\nhttps://yourdomain.com/products/item-123\nhttps://yourdomain.com/sitemap.xml`}
               rows={6}
-              className="w-full rounded-xl bg-slate-950/80 border border-slate-800 focus:border-cyan-500/80 focus:ring-4 focus:ring-cyan-500/10 text-slate-100 placeholder-slate-500 p-4 font-mono text-sm leading-relaxed transition-all shadow-inner outline-none resize-y"
+              className="w-full rounded-xl bg-slate-950/90 border border-slate-800 focus:border-slate-400/80 focus:ring-4 focus:ring-slate-400/10 text-slate-100 placeholder-slate-500 p-4 font-mono text-sm leading-relaxed transition-all shadow-inner outline-none resize-y"
             ></textarea>
 
             {/* URL Counter Pill */}
-            <div className="absolute bottom-3 right-3 flex items-center space-x-2 px-3 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-400 shadow-md">
-              <FileText className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="absolute bottom-3 right-3 flex items-center space-x-2 px-3 py-1 rounded-md bg-slate-900/90 border border-slate-800 text-xs font-mono text-slate-300 shadow-md">
+              <FileText className="w-3.5 h-3.5 text-slate-300" />
               <span>{lineCount} {lineCount === 1 ? 'URL' : 'URLs'} Detected</span>
             </div>
           </div>
@@ -190,13 +190,13 @@ export default function UrlSubmitter({
               onClick={() => toggleEngine('indexnow')}
               className={`cursor-pointer rounded-xl p-4 border transition-all duration-200 flex flex-col justify-between ${
                 selectedEngines.includes('indexnow')
-                  ? 'bg-slate-900 border-cyan-500/60 shadow-lg shadow-cyan-500/10 ring-1 ring-cyan-500/30'
+                  ? 'bg-slate-900 border-slate-500/80 shadow-lg shadow-slate-400/10 ring-1 ring-slate-400/30'
                   : 'bg-slate-950/50 border-slate-800/80 opacity-60 hover:opacity-100'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400">
+                  <div className="p-2 rounded-lg bg-slate-800 text-slate-200">
                     <Zap className="w-4 h-4" />
                   </div>
                   <span className="font-semibold text-sm text-white">IndexNow Protocol</span>
@@ -205,7 +205,7 @@ export default function UrlSubmitter({
                   type="checkbox"
                   checked={selectedEngines.includes('indexnow')}
                   onChange={() => {}}
-                  className="rounded border-slate-700 text-cyan-500 focus:ring-cyan-500/20 bg-slate-900"
+                  className="rounded border-slate-700 text-slate-300 focus:ring-slate-500/20 bg-slate-900"
                 />
               </div>
               <p className="text-xs text-slate-400">
@@ -218,13 +218,13 @@ export default function UrlSubmitter({
               onClick={() => toggleEngine('ping')}
               className={`cursor-pointer rounded-xl p-4 border transition-all duration-200 flex flex-col justify-between ${
                 selectedEngines.includes('ping')
-                  ? 'bg-slate-900 border-indigo-500/60 shadow-lg shadow-indigo-500/10 ring-1 ring-indigo-500/30'
+                  ? 'bg-slate-900 border-slate-500/80 shadow-lg shadow-slate-400/10 ring-1 ring-slate-400/30'
                   : 'bg-slate-950/50 border-slate-800/80 opacity-60 hover:opacity-100'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
+                  <div className="p-2 rounded-lg bg-slate-800 text-slate-200">
                     <Globe className="w-4 h-4" />
                   </div>
                   <span className="font-semibold text-sm text-white">Global Ping Network</span>
@@ -233,7 +233,7 @@ export default function UrlSubmitter({
                   type="checkbox"
                   checked={selectedEngines.includes('ping')}
                   onChange={() => {}}
-                  className="rounded border-slate-700 text-indigo-500 focus:ring-indigo-500/20 bg-slate-900"
+                  className="rounded border-slate-700 text-slate-300 focus:ring-slate-500/20 bg-slate-900"
                 />
               </div>
               <p className="text-xs text-slate-400">
@@ -246,13 +246,13 @@ export default function UrlSubmitter({
               onClick={() => toggleEngine('google_api')}
               className={`cursor-pointer rounded-xl p-4 border transition-all duration-200 flex flex-col justify-between ${
                 selectedEngines.includes('google_api')
-                  ? 'bg-slate-900 border-emerald-500/60 shadow-lg shadow-emerald-500/10 ring-1 ring-emerald-500/30'
+                  ? 'bg-slate-900 border-slate-500/80 shadow-lg shadow-slate-400/10 ring-1 ring-slate-400/30'
                   : 'bg-slate-950/50 border-slate-800/80 opacity-70 hover:opacity-100'
               }`}
             >
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center space-x-2">
-                  <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400">
+                  <div className="p-2 rounded-lg bg-slate-800 text-slate-200">
                     <Radio className="w-4 h-4" />
                   </div>
                   <span className="font-semibold text-sm text-white">Google Indexing API</span>
@@ -261,7 +261,7 @@ export default function UrlSubmitter({
                   type="checkbox"
                   checked={selectedEngines.includes('google_api')}
                   onChange={() => {}}
-                  className="rounded border-slate-700 text-emerald-500 focus:ring-emerald-500/20 bg-slate-900"
+                  className="rounded border-slate-700 text-slate-300 focus:ring-slate-500/20 bg-slate-900"
                 />
               </div>
               <p className="text-xs text-slate-400">
@@ -278,32 +278,32 @@ export default function UrlSubmitter({
                 type="checkbox"
                 checked={performPreflight}
                 onChange={(e) => setPerformPreflight(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-cyan-500 focus:ring-cyan-500/20"
+                className="w-4 h-4 rounded border-slate-700 bg-slate-950 text-slate-300 focus:ring-slate-500/20"
               />
               <span className="text-xs text-slate-300 flex items-center gap-1.5 font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
+                <CheckCircle2 className="w-3.5 h-3.5 text-slate-300" />
                 Run Pre-flight 200 OK HTTP Check before submitting
               </span>
             </label>
 
-            {/* Liquid Submit Button */}
+            {/* Metallic Liquid Submit Button */}
             <button
               type="submit"
               disabled={isSubmitting || lineCount === 0}
-              className={`relative group overflow-hidden px-8 py-3.5 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 shadow-xl flex items-center justify-center space-x-2 ${
+              className={`relative group overflow-hidden px-8 py-3.5 rounded-xl font-extrabold text-sm tracking-wide transition-all duration-300 shadow-xl flex items-center justify-center space-x-2 ${
                 isSubmitting || lineCount === 0
                   ? 'bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed'
-                  : 'bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 text-white hover:from-cyan-400 hover:via-indigo-500 hover:to-emerald-400 shadow-cyan-500/25 hover:shadow-cyan-500/40 active:scale-[0.98]'
+                  : 'bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 hover:from-white hover:to-slate-300 shadow-slate-400/25 hover:shadow-slate-400/40 active:scale-[0.98]'
               }`}
             >
               {isSubmitting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  <div className="w-4 h-4 border-2 border-slate-950/30 border-t-slate-950 rounded-full animate-spin"></div>
                   <span>Broadcasting Engine...</span>
                 </>
               ) : (
                 <>
-                  <Send className="w-4 h-4 text-cyan-200 transition-transform group-hover:translate-x-1" />
+                  <Send className="w-4 h-4 text-slate-950 transition-transform group-hover:translate-x-1" />
                   <span>Start Instant Indexing ({lineCount})</span>
                 </>
               )}

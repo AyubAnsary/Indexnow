@@ -20,6 +20,7 @@ import {
   Radio,
   FileCode,
   Check,
+  Cpu,
 } from 'lucide-react';
 import UrlSubmitter from './UrlSubmitter';
 import LiveMonitor from './LiveMonitor';
@@ -41,7 +42,6 @@ export default function LandingPage({
   activeJob,
 }: LandingPageProps) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [billingCycle, setBillingCycle] = useState<'monthly' | 'annual'>('monthly');
 
   const faqs = [
     {
@@ -65,38 +65,37 @@ export default function LandingPage({
   return (
     <div className="space-y-24 py-4 animate-fade-in">
       
-      {/* 1. Google-Inspired Material Hero Section */}
+      {/* 1. Metallic Silver Stone Hero Section */}
       <section className="relative text-center space-y-8 max-w-5xl mx-auto px-4 pt-4">
-        {/* Glow Ambient Backdrop */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-500/20 via-indigo-600/15 to-emerald-400/20 rounded-full blur-[120px] pointer-events-none"></div>
+        {/* Glow Ambient Silver Backdrop */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-slate-400/15 via-zinc-400/10 to-slate-200/20 rounded-full blur-[120px] pointer-events-none"></div>
 
-        {/* Google Material Badge */}
+        {/* Chrome Metallic Badge */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-800 text-xs font-semibold shadow-xl shadow-cyan-950/20 backdrop-blur-xl"
+          className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-slate-900/90 border border-slate-700/80 text-xs font-semibold shadow-xl shadow-slate-950/40 backdrop-blur-xl"
         >
           <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-slate-300 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-slate-200"></span>
           </span>
-          <span className="bg-gradient-to-r from-cyan-400 to-indigo-300 bg-clip-text text-transparent">
-            Google Indexing API + IndexNow Protocol Engine v2.0
+          <span className="bg-gradient-to-r from-slate-100 via-zinc-300 to-slate-400 bg-clip-text text-transparent font-mono">
+            SILVERSTONE METALLIC INDEXING ENGINE v2.0
           </span>
         </motion.div>
 
-        {/* Hero Title */}
+        {/* Metallic Hero Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
           className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[1.1]"
         >
-          Get Your Web Pages Indexed <br className="hidden sm:block" />
-          <span className="bg-gradient-to-r from-cyan-400 via-indigo-300 to-emerald-400 bg-clip-text text-transparent">
-            Across All Search Engines
-          </span>{' '}
-          in Seconds.
+          Index Web Pages in Seconds <br className="hidden sm:block" />
+          <span className="bg-gradient-to-r from-slate-100 via-zinc-200 to-slate-400 bg-clip-text text-transparent">
+            Across Google, Bing & Yandex
+          </span>
         </motion.h1>
 
         {/* Hero Subtitle */}
@@ -118,16 +117,16 @@ export default function LandingPage({
         >
           <button
             onClick={onOpenAuth}
-            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 via-indigo-600 to-emerald-500 hover:from-cyan-400 hover:via-indigo-500 hover:to-emerald-400 text-white font-bold text-sm shadow-xl shadow-cyan-500/25 transition transform hover:scale-[1.02] flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 hover:from-white hover:to-slate-300 text-slate-950 font-extrabold text-sm shadow-xl shadow-slate-400/20 transition transform hover:scale-[1.02] flex items-center justify-center space-x-2"
           >
-            <Zap className="w-4 h-4 text-cyan-200" />
+            <Zap className="w-4 h-4 text-slate-950" />
             <span>Start Free — 10 URLs/month</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-slate-950" />
           </button>
 
           <button
             onClick={onOpenPricing}
-            className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-800 text-xs font-bold transition flex items-center justify-center space-x-2"
+            className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-bold transition flex items-center justify-center space-x-2"
           >
             <span>Explore Pricing ($5/mo)</span>
           </button>
@@ -141,32 +140,32 @@ export default function LandingPage({
           className="pt-6 flex flex-wrap items-center justify-center gap-8 text-slate-400 text-xs font-mono"
         >
           <div className="flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-slate-300" />
             <span>100% Free IndexNow Protocol</span>
           </div>
           <div className="flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-cyan-400" />
+            <CheckCircle2 className="w-4 h-4 text-slate-300" />
             <span>Zero Site Setup Required</span>
           </div>
           <div className="flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-indigo-400" />
+            <CheckCircle2 className="w-4 h-4 text-slate-300" />
             <span>AES-256 Encrypted Vault</span>
           </div>
         </motion.div>
       </section>
 
-      {/* 2. Interactive Sandbox Preview Console */}
+      {/* 2. Interactive Metallic Sandbox Preview Console */}
       <section className="max-w-6xl mx-auto px-4 space-y-6">
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-bold text-white flex items-center justify-center space-x-2">
-            <Zap className="w-5 h-5 text-cyan-400" />
-            <span>Live Interactive Indexer Sandbox</span>
+            <Cpu className="w-5 h-5 text-slate-300" />
+            <span>SilverStone Interactive Indexer Sandbox</span>
           </h2>
           <p className="text-xs text-slate-400">Test URL parsing and instant broadcasting directly below.</p>
         </div>
 
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/30 via-indigo-500/20 to-emerald-500/30 rounded-3xl blur-xl opacity-40"></div>
+          <div className="absolute -inset-1 bg-gradient-to-r from-slate-400/20 via-zinc-400/20 to-slate-200/20 rounded-3xl blur-xl opacity-40"></div>
           <div className="relative space-y-6">
             <UrlSubmitter
               onSubmit={onSubmitDemo}
@@ -182,7 +181,7 @@ export default function LandingPage({
       {/* 3. Feature Highlights Grid */}
       <section className="max-w-7xl mx-auto px-4 space-y-12">
         <div className="text-center space-y-3">
-          <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest">WHY CHOOSE INDEXPULSE</span>
+          <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest">WHY CHOOSE SILVERSTONE</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Built for High Performance & Maximum Crawl Speed</h2>
           <p className="text-slate-400 text-sm max-w-xl mx-auto">
             Everything your engineering and SEO team needs to automate URL indexation across all major search engines.
@@ -191,8 +190,8 @@ export default function LandingPage({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Card 1 */}
-          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-cyan-500/40 transition duration-300 shadow-xl">
-            <div className="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 w-fit border border-cyan-500/20">
+          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-slate-600 transition duration-300 shadow-xl">
+            <div className="p-3 rounded-xl bg-slate-800 text-slate-200 w-fit border border-slate-700">
               <Zap className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white">IndexNow Instant Broadcast</h3>
@@ -202,8 +201,8 @@ export default function LandingPage({
           </div>
 
           {/* Card 2 */}
-          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-indigo-500/40 transition duration-300 shadow-xl">
-            <div className="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 w-fit border border-indigo-500/20">
+          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-slate-600 transition duration-300 shadow-xl">
+            <div className="p-3 rounded-xl bg-slate-800 text-slate-200 w-fit border border-slate-700">
               <Radio className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white">Google Cloud API Push</h3>
@@ -213,8 +212,8 @@ export default function LandingPage({
           </div>
 
           {/* Card 3 */}
-          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-emerald-500/40 transition duration-300 shadow-xl">
-            <div className="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 w-fit border border-emerald-500/20">
+          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-slate-600 transition duration-300 shadow-xl">
+            <div className="p-3 rounded-xl bg-slate-800 text-slate-200 w-fit border border-slate-700">
               <Globe className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white">XML Sitemap Auto-Extractor</h3>
@@ -224,8 +223,8 @@ export default function LandingPage({
           </div>
 
           {/* Card 4 */}
-          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-purple-500/40 transition duration-300 shadow-xl">
-            <div className="p-3 rounded-xl bg-purple-500/10 text-purple-400 w-fit border border-purple-500/20">
+          <div className="rounded-2xl bg-slate-900/80 backdrop-blur-xl border border-slate-800 p-6 space-y-4 hover:border-slate-600 transition duration-300 shadow-xl">
+            <div className="p-3 rounded-xl bg-slate-800 text-slate-200 w-fit border border-slate-700">
               <Shield className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-bold text-white">SSRF & AES-256 Vault</h3>
@@ -236,50 +235,10 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 4. How It Works (3-Step Pipeline) */}
-      <section className="max-w-6xl mx-auto px-4 space-y-12">
-        <div className="text-center space-y-3">
-          <span className="text-xs font-mono font-bold text-emerald-400 uppercase tracking-widest">SIMPLE WORKFLOW</span>
-          <h2 className="text-3xl font-extrabold text-white">How IndexPulse Automates Search Crawling</h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-6 text-center space-y-3">
-            <div className="w-10 h-10 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 flex items-center justify-center mx-auto font-mono font-bold text-sm">
-              01
-            </div>
-            <h3 className="text-base font-bold text-white">Paste URLs or Sitemap</h3>
-            <p className="text-xs text-slate-400">
-              Paste raw URLs or your site sitemap link. Our validator cleans and prepares your payload.
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-6 text-center space-y-3">
-            <div className="w-10 h-10 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 flex items-center justify-center mx-auto font-mono font-bold text-sm">
-              02
-            </div>
-            <h3 className="text-base font-bold text-white">Engine Verification & Proxy</h3>
-            <p className="text-xs text-slate-400">
-              Our engine hosts the verification key on our proxy endpoint. No file uploads required on your server.
-            </p>
-          </div>
-
-          <div className="rounded-2xl bg-slate-900/60 border border-slate-800 p-6 text-center space-y-3">
-            <div className="w-10 h-10 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center mx-auto font-mono font-bold text-sm">
-              03
-            </div>
-            <h3 className="text-base font-bold text-white">Instant Search Engine Crawl</h3>
-            <p className="text-xs text-slate-400">
-              Search engine webhooks trigger immediate crawling and status updates in your live telemetry console.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Subscription Pricing Matrix */}
+      {/* 4. Subscription Pricing Matrix */}
       <section className="max-w-7xl mx-auto px-4 space-y-12">
         <div className="text-center space-y-3">
-          <span className="text-xs font-mono font-bold text-cyan-400 uppercase tracking-widest">TRANSPARENT PRICING</span>
+          <span className="text-xs font-mono font-bold text-slate-300 uppercase tracking-widest">TRANSPARENT PRICING</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Flexible Plans for Individuals & Agencies</h2>
           <p className="text-xs text-slate-400">Start with 10 free URLs every month. Upgrade as your indexing volume grows.</p>
         </div>
@@ -290,7 +249,7 @@ export default function LandingPage({
               key={plan.id}
               className={`rounded-2xl p-6 border flex flex-col justify-between transition duration-300 ${
                 plan.id === 'pro'
-                  ? 'bg-slate-900 border-indigo-500/60 shadow-xl shadow-indigo-500/10 ring-1 ring-indigo-500/30'
+                  ? 'bg-slate-900 border-slate-600 shadow-xl shadow-slate-950/60 ring-1 ring-slate-500'
                   : 'bg-slate-900/60 border-slate-800'
               }`}
             >
@@ -305,14 +264,14 @@ export default function LandingPage({
                   {plan.id !== 'custom' && <span className="text-xs text-slate-400"> / month</span>}
                 </div>
 
-                <div className="mb-6 p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-center font-mono text-xs text-cyan-400 font-bold">
+                <div className="mb-6 p-2.5 rounded-xl bg-slate-950 border border-slate-800 text-center font-mono text-xs text-slate-200 font-bold">
                   {plan.monthlyQuota.toLocaleString()} URLs / month
                 </div>
 
                 <ul className="space-y-2.5 mb-6 text-xs text-slate-300">
                   {plan.features.map((feat, idx) => (
                     <li key={idx} className="flex items-start space-x-2">
-                      <Check className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-slate-300 flex-shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </li>
                   ))}
@@ -321,7 +280,7 @@ export default function LandingPage({
 
               <button
                 onClick={onOpenAuth}
-                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-bold text-xs shadow-md transition"
+                className="w-full py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md transition hover:from-white hover:to-slate-300"
               >
                 {plan.id === 'free' ? 'Start Free' : plan.id === 'custom' ? 'Contact Admin' : 'Get Started'}
               </button>
@@ -330,11 +289,11 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 6. FAQ Accordion */}
+      {/* 5. FAQ Accordion */}
       <section className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-2xl font-bold text-white">Frequently Asked Questions</h2>
-          <p className="text-xs text-slate-400">Everything you need to know about the IndexPulse engine.</p>
+          <p className="text-xs text-slate-400">Everything you need to know about the SilverStone engine.</p>
         </div>
 
         <div className="space-y-4">
@@ -342,11 +301,11 @@ export default function LandingPage({
             <div key={idx} className="rounded-2xl bg-slate-900/80 border border-slate-800 overflow-hidden">
               <button
                 onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                className="w-full p-5 text-left flex justify-between items-center text-sm font-bold text-white hover:text-cyan-300 transition"
+                className="w-full p-5 text-left flex justify-between items-center text-sm font-bold text-white hover:text-slate-200 transition"
               >
                 <span>{faq.q}</span>
                 {openFaq === idx ? (
-                  <ChevronUp className="w-4 h-4 text-cyan-400" />
+                  <ChevronUp className="w-4 h-4 text-slate-300" />
                 ) : (
                   <ChevronDown className="w-4 h-4 text-slate-500" />
                 )}
