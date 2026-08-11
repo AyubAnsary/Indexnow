@@ -454,7 +454,45 @@ export default function LandingPage({
         </div>
       </section>
 
-      {/* 7. FAQs */}
+      {/* 7. Author & Technical SEO Authority Section */}
+      <section className="max-w-5xl mx-auto px-4">
+        <div className="p-8 rounded-3xl bg-slate-900/90 backdrop-blur-2xl border border-slate-800 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 font-sans">
+          <div className="space-y-3 text-left">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center space-x-2">
+              <Award className="w-4 h-4 text-slate-300" />
+              <span>ARCHITECTED BY ENTERPRISE TECHNICAL SEO CONSULTANT</span>
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-white">
+              Designed & Built by Ayub Ansary
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl leading-relaxed">
+              Specializing in enterprise technical SEO infrastructure, programmatic SEO (pSEO) indexing pipelines, and high-performance search crawler acceleration.
+            </p>
+            <div className="pt-2">
+              <a
+                href="https://ayubansary.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-slate-200 via-slate-100 to-zinc-400 text-slate-950 font-extrabold text-xs shadow-md hover:from-white hover:to-slate-300 transition"
+              >
+                <span>Visit AyubAnsary.com</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-950" />
+              </a>
+            </div>
+          </div>
+
+          <div className="p-6 rounded-2xl bg-slate-950 border border-slate-800 space-y-2 font-mono text-xs text-slate-400 min-w-[260px]">
+            <div className="text-white font-bold text-sm">Ayub Ansary</div>
+            <div className="text-slate-300">Enterprise Technical SEO Engineer</div>
+            <div className="text-[11px] text-slate-500">ayubansary.com</div>
+            <div className="pt-2 text-[10px] text-slate-400 border-t border-slate-900">
+              Entity Authority: Certified Indexing Specialist
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. FAQs */}
       <section className="max-w-4xl mx-auto px-4 space-y-8">
         <div className="text-center space-y-3">
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
