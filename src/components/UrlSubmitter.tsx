@@ -66,10 +66,10 @@ export default function UrlSubmitter({
   const handleQuickPreset = (preset: 'sample' | 'sitemap') => {
     if (preset === 'sample') {
       setRawInput(
-        `https://nagorik.tech/`
+        `https://ayubansary.com/`
       );
     } else if (preset === 'sitemap') {
-      setRawInput(`https://nagorik.tech/sitemap.xml`);
+      setRawInput(`https://ayubansary.com/sitemap.xml`);
     }
     setErrorMsg(null);
     setAuditResult(null);

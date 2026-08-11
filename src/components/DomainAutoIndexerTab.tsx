@@ -103,7 +103,7 @@ export default function DomainAutoIndexerTab({ onRefreshData }: DomainAutoIndexe
             type="text"
             value={domainInput}
             onChange={(e) => setDomainInput(e.target.value)}
-            placeholder="e.g. nagorik.tech or https://yourdomain.com"
+            placeholder="e.g. ayubansary.com or https://yourdomain.com"
             required
             className="flex-1 px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 font-mono outline-none focus:border-slate-500"
           />
