@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedUser } from '@/lib/auth';
 import { getUserGoogleCredentials } from '@/lib/job-store';
+import { initCronScheduler } from '@/lib/cron-scheduler';
 
 export async function GET(req: Request) {
   try {
+    // Launch Autonomous Background Cron Daemon
+    initCronScheduler();
+
     const user = await getAuthenticatedUser(req);
     if (!user) {
       return NextResponse.json({ success: false, authenticated: false }, { status: 401 });
