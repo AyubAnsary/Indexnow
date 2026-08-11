@@ -1,0 +1,149 @@
+{
+  "jobs": [
+    {
+      "id": "job_msof68iemely",
+      "createdAt": "2026-08-11T08:49:48.951Z",
+      "updatedAt": "2026-08-11T08:49:52.485Z",
+      "totalUrls": 1,
+      "processedCount": 1,
+      "successCount": 1,
+      "failedCount": 0,
+      "status": "success",
+      "enginesSelected": [
+        "indexnow",
+        "ping"
+      ],
+      "urls": [
+        {
+          "id": "job_msof68iemely_0",
+          "url": "https://nagorik.tech/",
+          "domain": "nagorik.tech",
+          "status": "indexnow_success",
+          "engineResults": [
+            {
+              "engine": "indexnow",
+              "endpoint": "https://api.indexnow.org/indexnow",
+              "success": true,
+              "statusCode": 202,
+              "message": "HTTP 202: URL accepted. Key verification pending.",
+              "timestamp": "2026-08-11T08:49:49.221Z"
+            },
+            {
+              "engine": "indexnow",
+              "endpoint": "https://www.bing.com/indexnow",
+              "success": true,
+              "statusCode": 202,
+              "message": "HTTP 202: URL accepted. Key verification pending.",
+              "timestamp": "2026-08-11T08:49:50.550Z"
+            },
+            {
+              "engine": "ping",
+              "endpoint": "Google Sitemap Ping",
+              "success": false,
+              "statusCode": 404,
+              "message": "Ping rejected by Google Sitemap Ping (HTTP 404)",
+              "timestamp": "2026-08-11T08:49:51.360Z"
+            },
+            {
+              "engine": "ping",
+              "endpoint": "Bing Sitemap Ping",
+              "success": false,
+              "statusCode": 410,
+              "message": "Ping rejected by Bing Sitemap Ping (HTTP 410)",
+              "timestamp": "2026-08-11T08:49:52.385Z"
+            }
+          ],
+          "httpStatus": 200,
+          "httpStatusText": "OK",
+          "submittedAt": "2026-08-11T08:49:51.360Z"
+        }
+      ],
+      "logs": [
+        {
+          "id": "log_1",
+          "timestamp": "2026-08-11T08:49:48.951Z",
+          "level": "info",
+          "message": "Job initialized with 1 target URL(s)."
+        },
+        {
+          "id": "gu1w5js",
+          "timestamp": "2026-08-11T08:49:48.952Z",
+          "level": "info",
+          "message": "Starting execution for engines: INDEXNOW, PING"
+        },
+        {
+          "id": "j4p9yyn",
+          "timestamp": "2026-08-11T08:49:48.955Z",
+          "level": "info",
+          "message": "Running pre-flight HTTP verification checks on URLs..."
+        },
+        {
+          "id": "kv490ja",
+          "timestamp": "2026-08-11T08:49:49.219Z",
+          "level": "info",
+          "message": "Pre-flight https://nagorik.tech/ -> HTTP 200 (OK)"
+        },
+        {
+          "id": "5rgupbd",
+          "timestamp": "2026-08-11T08:49:49.220Z",
+          "level": "info",
+          "engine": "indexnow",
+          "message": "Broadcasting URLs via IndexNow Protocol (Host Key: a3fcbb6ea8f68824ba2fdd64dfc4a393)..."
+        },
+        {
+          "id": "7zpb1p0",
+          "timestamp": "2026-08-11T08:49:49.220Z",
+          "level": "info",
+          "engine": "indexnow",
+          "message": "Submitting batch of 1 URL(s) for domain nagorik.tech..."
+        },
+        {
+          "id": "z2yga60",
+          "timestamp": "2026-08-11T08:49:51.358Z",
+          "level": "success",
+          "engine": "indexnow",
+          "message": "[https://api.indexnow.org/indexnow] HTTP 202: URL accepted. Key verification pending."
+        },
+        {
+          "id": "h6in928",
+          "timestamp": "2026-08-11T08:49:51.359Z",
+          "level": "success",
+          "engine": "indexnow",
+          "message": "[https://www.bing.com/indexnow] HTTP 202: URL accepted. Key verification pending."
+        },
+        {
+          "id": "nr1o2v9",
+          "timestamp": "2026-08-11T08:49:51.360Z",
+          "level": "info",
+          "engine": "ping",
+          "message": "Notifying Google & Bing sitemap ping crawler endpoints..."
+        },
+        {
+          "id": "92qfb6n",
+          "timestamp": "2026-08-11T08:49:52.483Z",
+          "level": "error",
+          "engine": "ping",
+          "message": "[Google Sitemap Ping] Ping rejected by Google Sitemap Ping (HTTP 404)"
+        },
+        {
+          "id": "tszj28e",
+          "timestamp": "2026-08-11T08:49:52.484Z",
+          "level": "error",
+          "engine": "ping",
+          "message": "[Bing Sitemap Ping] Ping rejected by Bing Sitemap Ping (HTTP 410)"
+        },
+        {
+          "id": "k1qlly1",
+          "timestamp": "2026-08-11T08:49:52.485Z",
+          "level": "success",
+          "message": "Indexing Job Completed. Success: 1/1 URLs (100% pass rate)."
+        }
+      ],
+      "keyUsed": "a3fcbb6ea8f68824ba2fdd64dfc4a393"
+    }
+  ],
+  "credentials": {
+    "googleServiceAccount": null,
+    "bingApiKey": null
+  }
+}

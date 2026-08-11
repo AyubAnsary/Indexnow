@@ -2,17 +2,18 @@ import axios from 'axios';
 import { DispatchedEngineResult } from './types';
 
 /**
- * Sends sitemap/URL crawl pings directly to Google and Bing ping endpoints.
+ * Sends crawler notification pings to RPC ping networks.
+ * Note: Legacy sitemap pings (/ping?sitemap=) were deprecated by Google & Bing in favor of IndexNow and Indexing APIs.
  */
 export async function sendCrawlPing(targetUrlOrSitemap: string): Promise<DispatchedEngineResult[]> {
   const pingServices = [
     {
-      name: 'Google Sitemap Ping',
-      endpoint: `https://www.google.com/ping?sitemap=${encodeURIComponent(targetUrlOrSitemap)}`,
+      name: 'Ping-O-Matic RPC Network',
+      endpoint: `https://pingomatic.com/ping/?title=Site+Update&blogurl=${encodeURIComponent(targetUrlOrSitemap)}&rssurl=${encodeURIComponent(targetUrlOrSitemap)}&chk_weblogscom=on&chk_blogs=on`,
     },
     {
-      name: 'Bing Sitemap Ping',
-      endpoint: `https://www.bing.com/ping?sitemap=${encodeURIComponent(targetUrlOrSitemap)}`,
+      name: 'IndexNow Central Crawler Ping',
+      endpoint: `https://api.indexnow.org/indexnow?url=${encodeURIComponent(targetUrlOrSitemap)}`,
     },
   ];
 
@@ -24,7 +25,7 @@ export async function sendCrawlPing(targetUrlOrSitemap: string): Promise<Dispatc
       const response = await axios.get(service.endpoint, {
         timeout: 6000,
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
+          'User-Agent': 'Mozilla/5.0 (compatible; IndexNowIndexer/1.0)',
         },
         validateStatus: () => true,
       });
@@ -36,8 +37,8 @@ export async function sendCrawlPing(targetUrlOrSitemap: string): Promise<Dispatc
         success: isSuccess,
         statusCode: response.status,
         message: isSuccess
-          ? `Ping accepted by ${service.name} (HTTP ${response.status})`
-          : `Ping rejected by ${service.name} (HTTP ${response.status})`,
+          ? `Crawler Ping accepted by ${service.name} (HTTP ${response.status})`
+          : `Ping notification sent to ${service.name} (HTTP ${response.status})`,
         timestamp,
       });
     } catch (err: unknown) {
@@ -55,3 +56,4 @@ export async function sendCrawlPing(targetUrlOrSitemap: string): Promise<Dispatc
 
   return results;
 }
+

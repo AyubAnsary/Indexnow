@@ -128,6 +128,34 @@ export default function LiveMonitor({ job }: LiveMonitorProps) {
         ))}
         <div ref={terminalEndRef} />
       </div>
+
+      {/* IndexNow Key File Download Helper */}
+      {job.keyUsed && (
+        <div className="mt-4 p-3.5 rounded-xl bg-cyan-500/5 border border-cyan-500/20 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center space-x-2.5">
+            <Sparkles className="w-4 h-4 text-cyan-400 flex-shrink-0" />
+            <div>
+              <span className="text-slate-300 font-semibold">IndexNow Key generated: </span>
+              <span className="font-mono text-cyan-300">{job.keyUsed}</span>
+            </div>
+          </div>
+          <button
+            onClick={() => {
+              const element = document.createElement('a');
+              const file = new Blob([job.keyUsed!], { type: 'text/plain' });
+              element.href = URL.createObjectURL(file);
+              element.download = `${job.keyUsed}.txt`;
+              document.body.appendChild(element);
+              element.click();
+              element.remove();
+            }}
+            className="px-3 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-mono font-medium transition self-start sm:self-auto"
+          >
+            Download {job.keyUsed.substring(0, 8)}.txt
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+
